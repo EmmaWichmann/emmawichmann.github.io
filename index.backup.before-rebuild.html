@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EmmaCodes🌿</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --parchment:#F5EED8;--parchment-d:#E8DFC0;--bark:#5C3D2E;--clay:#8B5A3A;--clay-l:#C4855A;--moss:#6B7C5A;--moss-l:#8A9E74;--sand:#D4C4A0;--ink:#2C1F14;--cream:#FAF6EC;--gold:#C9A84C;--gold-l:#E8C96A;--rose:#C4847A;--blush:#F5DDD8;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--parchment);background-image:radial-gradient(ellipse at 10% 0%,rgba(107,124,90,.12),transparent 50%),radial-gradient(ellipse at 90% 100%,rgba(196,132,122,.1),transparent 50%);font-family:'Source Serif 4',Georgia,serif;color:var(--ink);min-height:100vh;padding-bottom:70px;overflow-x:hidden;}
+    canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999;}
+    .header{background:linear-gradient(135deg,#C4847A,#8B5A3A 45%,#6B7C5A);padding:16px 20px 12px;text-align:center;box-shadow:0 3px 16px rgba(92,61,46,.3);}
+    .header h1{font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--parchment);}
+     .header h1 span{color:#C98C75;font-style:italic;}
+    .money-bar{display:inline-flex;gap:6px;align-items:center;background:rgba(250,246,236,.9);border-radius:999px;padding:4px 16px;margin-top:7px;font-weight:700;font-size:.92rem;}
+    .money-bar .amt{color:var(--moss);}
+    .tabs{display:flex;background:var(--cream);border-bottom:2px solid var(--sand);overflow-x:auto;}
+    .tab{flex:1;min-width:80px;padding:10px 5px;border:0;background:transparent;font-family:'Source Serif 4',serif;font-size:.75rem;font-weight:700;color:var(--clay-l);cursor:pointer;white-space:nowrap;}
+    .tab.active{color:var(--bark);border-bottom:3px solid var(--bark);background:var(--blush);}
+    .page{display:none;padding:14px;}
+    .page.active{display:block;}
+    .stats{display:flex;gap:8px;margin-bottom:14px;}
+    .stat{flex:1;border-radius:13px;padding:12px 8px;text-align:center;box-shadow:0 2px 8px rgba(92,61,46,.1);}
+    .stat.today{background:linear-gradient(135deg,var(--rose),var(--bark));}
+    .stat.total{background:linear-gradient(135deg,var(--moss-l),var(--moss));}
+    .stat.money{background:linear-gradient(135deg,var(--gold-l),var(--gold));}
+    .num{font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:700;color:#fff;line-height:1;}
+    .stat.money .num{color:var(--ink);}
+    .lbl{font-size:.6rem;color:rgba(255,255,255,.9);margin-top:3px;text-transform:uppercase;letter-spacing:.1em;font-weight:700;}
+    .stat.money .lbl{color:rgba(44,31,20,.65);}
+    .apply-wrap{text-align:center;margin-bottom:16px;display:flex;flex-direction:column;align-items:center;gap:8px;}
+    #apply-btn{background:linear-gradient(135deg,var(--bark),var(--clay));color:var(--parchment);border:0;border-radius:999px;padding:14px 42px;font-family:'Playfair Display',serif;font-size:1.1rem;cursor:pointer;box-shadow:0 4px 18px rgba(92,61,46,.3);}
+    #apply-btn:active{transform:scale(.97);}
+    .undo-redo{display:flex;gap:8px;}
+    #undo-btn,#redo-btn,#reset-btn{background:transparent;border:2px solid var(--sand);color:var(--clay);border-radius:999px;padding:7px 22px;font-family:'Source Serif 4',serif;font-weight:700;font-size:.8rem;cursor:pointer;}
+    #reset-btn{display:block;margin:16px auto 0;border-radius:8px;padding:5px 14px;font-size:.68rem;color:var(--clay-l);}
+    #milestone-banner{display:none;border-radius:13px;padding:14px;text-align:center;margin-bottom:12px;font-family:'Playfair Display',serif;background:linear-gradient(135deg,var(--gold-l),var(--gold));box-shadow:0 4px 16px rgba(201,168,76,.4);}
+    .section-label{font-size:.66rem;text-transform:uppercase;letter-spacing:.14em;color:var(--clay-l);margin:14px 0 8px;font-weight:700;}
+    .day-block{background:var(--cream);border:1.5px solid var(--sand);border-radius:11px;margin-bottom:7px;overflow:hidden;}
+    .day-head{display:flex;justify-content:space-between;align-items:center;padding:10px 13px;}
+    .day-head .date{font-family:'Playfair Display',serif;font-weight:700;font-size:.86rem;color:var(--bark);}
+    .badge{background:var(--bark);color:var(--parchment);font-size:.66rem;padding:3px 10px;border-radius:999px;font-weight:700;}
+    .day-entries{border-top:1.5px solid var(--parchment-d);padding:7px 13px 10px;display:flex;flex-direction:column;gap:4px;}
+    .entry{font-size:.73rem;color:var(--clay);display:flex;align-items:center;gap:6px;}
+    .entry:before{content:'✦';color:var(--rose);font-size:.53rem;}
+    .empty{text-align:center;color:var(--clay-l);font-size:.81rem;padding:20px 0;font-style:italic;}
+    .top-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+    .top-row h2{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--bark);}
+    .coin-pill{display:inline-flex;gap:5px;align-items:center;background:var(--cream);border:1px solid var(--sand);border-radius:999px;padding:4px 14px;font-family:'Playfair Display',serif;font-size:.9rem;color:var(--gold);}
+    .cat-tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px;}
+    .cat-tab{background:var(--cream);border:1.5px solid var(--sand);border-radius:999px;padding:4px 12px;font-size:.68rem;font-weight:700;cursor:pointer;color:var(--clay-l);font-family:'Source Serif 4',serif;}
+    .cat-tab.active{background:var(--bark);border-color:var(--bark);color:var(--parchment);}
+    .seed-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:9px;}
+    .seed-card{background:var(--cream);border:1.5px solid var(--sand);border-radius:13px;padding:12px 8px;text-align:center;}
+    .seed-card .emoji{font-size:1.9rem;display:block;margin-bottom:4px;}
+    .sname{font-family:'Playfair Display',serif;font-size:.75rem;color:var(--bark);font-weight:700;margin-bottom:2px;}
+    .sdesc{font-size:.62rem;color:var(--clay-l);margin-bottom:7px;line-height:1.3;min-height:26px;}
+    .sprice{font-size:.7rem;color:var(--gold);font-weight:700;margin-bottom:6px;}
+    .buy-btn{background:var(--moss);color:var(--cream);border:0;border-radius:999px;padding:5px 12px;font-family:'Source Serif 4',serif;font-size:.66rem;cursor:pointer;width:100%;font-weight:700;}
+    .buy-btn:disabled{background:var(--sand);color:var(--clay-l);cursor:not-allowed;}
+    .owned-badge{font-size:.58rem;color:var(--moss);display:block;margin-top:2px;}
+    .hint{font-size:.65rem;color:var(--clay-l);font-style:italic;}
+    .zoom-bar{display:flex;align-items:center;gap:8px;margin-bottom:10px;justify-content:flex-end;}
+    .zoom-btn{background:var(--cream);border:1.5px solid var(--sand);border-radius:8px;min-width:32px;height:32px;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--bark);font-weight:700;padding:0 10px;}
+    .zoom-lbl{font-size:.72rem;color:var(--clay-l);min-width:38px;text-align:center;}
+    .field-outer{border-radius:18px;border:2.5px solid #5a8f2e;overflow:hidden;box-shadow:0 6px 28px rgba(92,61,46,.22);margin-bottom:14px;}
+    /* field-scroll: fixed visible window, overflow scrolls when zoomed IN */
+    .field-scroll{overflow:auto;width:100%;height:360px;position:relative;}
+    /* field-canvas: always fills visible area, expands when zooming in */
+    .field-canvas{
+      position:relative;
+      min-width:100%;
+      min-height:360px;
+      background:
+        repeating-linear-gradient(87deg,transparent 0,transparent 8px,rgba(60,100,30,.07) 8px,rgba(60,100,30,.07) 9px),
+        repeating-linear-gradient(93deg,transparent 0,transparent 12px,rgba(80,120,40,.05) 12px,rgba(80,120,40,.05) 13px),
+        linear-gradient(180deg,#8dc455,#7ab648 15%,#6aa838 35%,#5a9230 55%,#4e8028 75%,#426e22);
+    }
+    .field-canvas:before{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+      background:
+        radial-gradient(ellipse 120px 18px at 50% 80%,rgba(180,160,120,.35),transparent),
+        radial-gradient(ellipse 100px 14px at 28% 88%,rgba(180,160,120,.28),transparent),
+        radial-gradient(ellipse 90px 14px at 72% 84%,rgba(180,160,120,.25),transparent),
+        radial-gradient(ellipse 100px 44px at 22% 58%,rgba(101,67,33,.25),transparent),
+        radial-gradient(ellipse 120px 50px at 70% 62%,rgba(101,67,33,.2),transparent);
+    }
+    .field-fence{position:absolute;bottom:0;left:0;right:0;height:26px;z-index:5;background:repeating-linear-gradient(90deg,#8B5A3A 0,#8B5A3A 10px,#7A4A2A 10px,#7A4A2A 12px,transparent 12px,transparent 16px);opacity:.55;}
+    .pstone{position:absolute;border-radius:50%;background:rgba(180,165,130,.5);z-index:2;}
+    .gdecor{position:absolute;pointer-events:none;z-index:2;filter:drop-shadow(0 2px 3px rgba(0,0,0,.18));}
+    .gitem{position:absolute;display:flex;flex-direction:column;align-items:center;cursor:grab;z-index:10;user-select:none;touch-action:none;}
+    .gitem.dragging{cursor:grabbing;z-index:200;opacity:.9;}
+    .gitem .gi-e{line-height:1;filter:drop-shadow(0 3px 4px rgba(0,0,0,.25));}
+    .gi-lbl{font-size:.36rem;color:#fff;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.6);margin-top:1px;white-space:nowrap;}
+    .gi-bar{width:24px;height:3px;background:rgba(255,255,255,.25);border-radius:2px;margin-top:1px;}
+    .gi-fill{height:100%;background:var(--gold-l);border-radius:2px;}
+    .animals-grid{display:flex;flex-wrap:wrap;gap:7px;}
+    .animal-tag{background:var(--cream);border:1.5px solid var(--sand);border-radius:12px;padding:7px 11px;display:flex;align-items:center;gap:7px;}
+    .at-e{font-size:1.3rem;}.at-n{font-size:.7rem;font-weight:700;color:var(--bark);}.at-r{font-size:.57rem;color:var(--clay-l);}
+    .inventory{display:flex;flex-wrap:wrap;gap:7px;padding:11px;background:var(--cream);border:1.5px solid var(--sand);border-radius:12px;min-height:44px;}
+    .inv-seed{display:flex;flex-direction:column;align-items:center;background:var(--parchment);border:1.5px solid var(--sand);border-radius:10px;padding:7px 9px;cursor:grab;user-select:none;}
+    .is-e{font-size:1.4rem;}.is-n{font-size:.52rem;color:var(--bark);font-weight:700;margin-top:2px;}.inv-empty{font-size:.74rem;color:var(--clay-l);font-style:italic;align-self:center;}
+    .animal-arrival{display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;background:rgba(44,31,20,.45);}
+    .animal-arrival.show{display:flex;}
+    .arrival-card{background:var(--cream);border:2px solid var(--rose);border-radius:24px;padding:28px 24px;text-align:center;max-width:280px;box-shadow:0 8px 40px rgba(92,61,46,.25);}
+    .arrival-emoji{font-size:4rem;display:block;margin-bottom:8px;}.arrival-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--bark);margin-bottom:5px;}.arrival-sub{font-size:.76rem;color:var(--clay-l);margin-bottom:14px;line-height:1.5;}
+    .arrival-btn{background:var(--bark);color:var(--parchment);border:0;border-radius:999px;padding:9px 24px;font-family:'Playfair Display',serif;font-size:.9rem;cursor:pointer;}
+    #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--bark);color:var(--parchment);font-size:.78rem;font-weight:700;padding:9px 20px;border-radius:999px;opacity:0;transition:transform .4s,opacity .3s;z-index:5000;white-space:nowrap;}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  </style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+ 
+<div class="animal-arrival" id="animal-arrival" onclick="closeArrival()">
+  <div class="arrival-card" onclick="event.stopPropagation()">
+    <span class="arrival-emoji" id="arrival-emoji">🐼</span>
+    <div class="arrival-title" id="arrival-title">A visitor!</div>
+    <div class="arrival-sub" id="arrival-sub">Someone moved into your garden.</div>
+    <button class="arrival-btn" onclick="closeArrival()">Welcome them! 🌿</button>
+  </div>
+</div>
+ 
+<div class="header">
+  <h1>emma<span>gets</span>hired🌿</h1>
+  <div class="money-bar">💰 <span class="amt" id="header-money">0</span> coins</div>
+</div>
+ 
+<div class="tabs">
+  <button class="tab active" onclick="showTab('tracker',this)">📋 Tracker</button>
+  <button class="tab" onclick="showTab('shop',this)">🌾 Seeds</button>
+  <button class="tab" onclick="showTab('garden',this)">🌱 Garden</button>
+</div>
+ 
+<div class="page active" id="page-tracker">
+  <div id="milestone-banner"></div>
+  <div class="stats">
+    <div class="stat today"><div class="num" id="today-count">0</div><div class="lbl">Today</div></div>
+    <div class="stat total"><div class="num" id="total-count">0</div><div class="lbl">All Time</div></div>
+    <div class="stat money"><div class="num" id="money-count">0</div><div class="lbl">💰 Coins</div></div>
+  </div>
+  <div class="apply-wrap">
+    <button id="apply-btn">✓ I Applied!</button>
+    <div class="undo-redo"><button id="undo-btn">↩ Undo</button><button id="redo-btn">↪ Redo</button></div>
+  </div>
+  <div class="section-label">Application Log</div>
+  <div id="log"></div>
+  <button id="reset-btn">reset all data</button>
+</div>
+ 
+<div class="page" id="page-shop">
+  <div class="top-row"><h2>🌾 Seed Shop</h2><div class="coin-pill">💰 <span id="shop-coins">0</span></div></div>
+  <div class="cat-tabs">
+    <button class="cat-tab active" onclick="setCat('all',this)">All</button>
+    <button class="cat-tab" onclick="setCat('flowers',this)">🌸 Flowers</button>
+    <button class="cat-tab" onclick="setCat('fruits',this)">🍓 Fruits</button>
+    <button class="cat-tab" onclick="setCat('veggies',this)">🥕 Veggies</button>
+    <button class="cat-tab" onclick="setCat('trees',this)">🌳 Trees</button>
+    <button class="cat-tab" onclick="setCat('herbs',this)">🌿 Herbs</button>
+    <button class="cat-tab" onclick="setCat('rare',this)">✨ Rare</button>
+  </div>
+  <div class="seed-grid" id="seed-grid"></div>
+</div>
+ 
+<div class="page" id="page-garden">
+  <div class="top-row"><h2>🌱 My Garden</h2><span class="hint">Drag seeds in · drag to move · double-click to remove</span></div>
+  <div class="zoom-bar">
+    <button class="zoom-btn" onclick="zoomOut()">−</button>
+    <span class="zoom-lbl" id="zoom-lbl">100%</span>
+    <button class="zoom-btn" onclick="zoomIn()">+</button>
+    <button class="zoom-btn" onclick="zoomReset()">Reset</button>
+  </div>
+  <div class="field-outer">
+    <div class="field-scroll" id="field-scroll">
+      <div class="field-canvas" id="field-canvas">
+        <!-- decorative stones positioned as % so they scale with field -->
+        <div class="pstone" style="width:22px;height:13px;left:18%;bottom:20%"></div>
+        <div class="pstone" style="width:17px;height:11px;left:31%;bottom:15%"></div>
+        <div class="pstone" style="width:25px;height:14px;left:45%;bottom:18%"></div>
+        <div class="pstone" style="width:19px;height:12px;left:59%;bottom:13%"></div>
+        <div class="pstone" style="width:23px;height:13px;left:73%;bottom:19%"></div>
+        <div class="pstone" style="width:15px;height:10px;left:86%;bottom:14%"></div>
+        <div class="gdecor" style="font-size:2rem;left:1%;top:8%">🌳</div>
+        <div class="gdecor" style="font-size:2rem;right:1%;top:6%">🌳</div>
+        <div class="gdecor" style="font-size:1.3rem;left:2%;top:40%">🪨</div>
+        <div class="gdecor" style="font-size:1.3rem;right:2%;top:44%">🪨</div>
+        <div class="gdecor" style="font-size:1.2rem;left:5%;bottom:24%">🌿</div>
+        <div class="gdecor" style="font-size:1.2rem;right:5%;bottom:26%">🌿</div>
+        <div class="field-fence"></div>
+      </div>
+    </div>
+  </div>
+  <div class="section-label">🐾 Garden Visitors</div>
+  <div class="animals-grid" id="animals-grid"></div>
+  <div class="section-label">🎒 Seed Inventory — drag onto garden</div>
+  <div class="inventory" id="inventory"></div>
+</div>
+ 
+<div id="toast"></div>
+ 
+<script>
+const SEEDS=[
+  {id:'daisy',emoji:'🌼',name:'Daisy',desc:'Cheerful & bright.',cost:2,cat:'flowers'},
+  {id:'tulip',emoji:'🌷',name:'Tulip',desc:'Fresh start vibes.',cost:3,cat:'flowers'},
+  {id:'rose',emoji:'🌹',name:'Rose',desc:'You worked hard for this.',cost:4,cat:'flowers'},
+  {id:'sunflower',emoji:'🌻',name:'Sunflower',desc:'Faces the future.',cost:3,cat:'flowers'},
+  {id:'cherry',emoji:'🌸',name:'Cherry Blossom',desc:'Interview energy.',cost:5,cat:'flowers'},
+  {id:'hibiscus',emoji:'🌺',name:'Hibiscus',desc:'Tropical treat.',cost:4,cat:'flowers'},
+  {id:'lavender',emoji:'💜',name:'Lavender',desc:'Keeps you calm.',cost:3,cat:'flowers'},
+  {id:'pansy',emoji:'🏵️',name:'Pansy',desc:'Delicate but strong.',cost:3,cat:'flowers'},
+  {id:'bouquet',emoji:'💐',name:'Wildflowers',desc:'A little of everything.',cost:6,cat:'flowers'},
+  {id:'lotus',emoji:'🪷',name:'Lotus',desc:'Rises from mud.',cost:6,cat:'flowers'},
+  {id:'strawberry',emoji:'🍓',name:'Strawberry',desc:'Sweet reward.',cost:3,cat:'fruits'},
+  {id:'watermelon',emoji:'🍉',name:'Watermelon',desc:'Summer vibes.',cost:4,cat:'fruits'},
+  {id:'grapes',emoji:'🍇',name:'Grapes',desc:'Abundance incoming.',cost:4,cat:'fruits'},
+  {id:'peach',emoji:'🍑',name:'Peach',desc:'Soft & sweet.',cost:3,cat:'fruits'},
+  {id:'lemon',emoji:'🍋',name:'Lemon',desc:'When life gives you...',cost:3,cat:'fruits'},
+  {id:'orange',emoji:'🍊',name:'Orange',desc:'Bright & cheerful.',cost:3,cat:'fruits'},
+  {id:'mango',emoji:'🥭',name:'Mango',desc:'Tropical success.',cost:4,cat:'fruits'},
+  {id:'pineapple',emoji:'🍍',name:'Pineapple',desc:'Stand tall. Be sweet.',cost:5,cat:'fruits'},
+  {id:'blueberry',emoji:'🫐',name:'Blueberries',desc:'Small but powerful.',cost:3,cat:'fruits'},
+  {id:'apple',emoji:'🍎',name:'Apple',desc:'An apple a day...',cost:3,cat:'fruits'},
+  {id:'carrot',emoji:'🥕',name:'Carrot',desc:'Root yourself.',cost:2,cat:'veggies'},
+  {id:'corn',emoji:'🌽',name:'Corn',desc:'Grow tall & strong.',cost:2,cat:'veggies'},
+  {id:'broccoli',emoji:'🥦',name:'Broccoli',desc:'Good for the brain.',cost:2,cat:'veggies'},
+  {id:'tomato',emoji:'🍅',name:'Tomato',desc:'Technically a fruit.',cost:2,cat:'veggies'},
+  {id:'lettuce',emoji:'🥬',name:'Lettuce',desc:'Crisp & fresh.',cost:2,cat:'veggies'},
+  {id:'pepper',emoji:'🌶️',name:'Red Pepper',desc:'Spice things up.',cost:3,cat:'veggies'},
+  {id:'pumpkin',emoji:'🎃',name:'Pumpkin',desc:'Autumn energy.',cost:3,cat:'veggies'},
+  {id:'bamboo',emoji:'🎋',name:'Bamboo',desc:'Grows fast.',cost:4,cat:'trees'},
+  {id:'maple',emoji:'🍁',name:'Maple Tree',desc:'Strong roots.',cost:5,cat:'trees'},
+  {id:'bonsai',emoji:'🎍',name:'Bonsai',desc:'Rare & refined.',cost:8,cat:'trees'},
+  {id:'palm',emoji:'🌴',name:'Palm Tree',desc:'Vacation vibes.',cost:5,cat:'trees'},
+  {id:'pine',emoji:'🌲',name:'Pine Tree',desc:'Always evergreen.',cost:4,cat:'trees'},
+  {id:'oak',emoji:'🌳',name:'Oak Tree',desc:'Shade & strength.',cost:5,cat:'trees'},
+  {id:'fern',emoji:'🌱',name:'Baby Fern',desc:'Just getting started.',cost:1,cat:'herbs'},
+  {id:'herb',emoji:'🌿',name:'Fresh Herbs',desc:'Practical & lovely.',cost:2,cat:'herbs'},
+  {id:'wheat',emoji:'🌾',name:'Wheat',desc:'Growth takes time.',cost:2,cat:'herbs'},
+  {id:'vine',emoji:'🍃',name:'Trailing Vine',desc:'Spreads everywhere.',cost:3,cat:'herbs'},
+  {id:'clover',emoji:'🍀',name:'Four-Leaf Clover',desc:'Pure luck.',cost:5,cat:'herbs'},
+  {id:'rainbow',emoji:'🌈',name:'Rainbow Plant',desc:'After every storm.',cost:8,cat:'rare'},
+  {id:'star',emoji:'⭐',name:'Star Flower',desc:'You are a star.',cost:7,cat:'rare'},
+  {id:'sparkle',emoji:'✨',name:'Sparkle Bloom',desc:'Pure magic.',cost:9,cat:'rare'},
+  {id:'moon',emoji:'🌙',name:'Moon Flower',desc:'Blooms at midnight.',cost:8,cat:'rare'},
+  {id:'crystal',emoji:'💎',name:'Crystal Bloom',desc:'Priceless beauty.',cost:12,cat:'rare'}
+];
+ 
+const ALL_ANIMALS=[
+  {emoji:'🐝',name:'Honey Bee',msg:'A little bee flew in! She approves of your hustle. 🍯',rarity:'Common'},
+  {emoji:'🦋',name:'Butterfly',msg:'A butterfly landed on your flowers! 🌸',rarity:'Common'},
+  {emoji:'🐛',name:'Friendly Worm',msg:'A worm is helping your soil grow! 🌱',rarity:'Common'},
+  {emoji:'🐞',name:'Ladybug',msg:'A ladybug brought extra luck! 🍀',rarity:'Common'},
+  {emoji:'🐌',name:'Garden Snail',msg:'Slow and steady wins the race! 🌿',rarity:'Common'},
+  {emoji:'🐜',name:'Tiny Ant',msg:'An ant admires your work ethic! 💪',rarity:'Common'},
+  {emoji:'🦗',name:'Cricket',msg:'A cricket is singing your praises tonight! 🎵',rarity:'Common'},
+  {emoji:'🪲',name:'Beetle',msg:'A shiny beetle wandered in. Good omen! ✨',rarity:'Common'},
+  {emoji:'🐶',name:'Puppy',msg:'A puppy ran into your garden!! 🐾',rarity:'Uncommon'},
+  {emoji:'🐼',name:'Panda',msg:'A panda arrived with bamboo snacks! 🎋',rarity:'Uncommon'},
+  {emoji:'🐸',name:'Little Frog',msg:'Ribbit! A frog hopped in. 🌿',rarity:'Uncommon'},
+  {emoji:'🐇',name:'Bunny',msg:'A bunny hopped over to cheer you on! 🍀',rarity:'Uncommon'},
+  {emoji:'🐱',name:'Kitten',msg:'A fluffy kitten made herself at home! 🌸',rarity:'Uncommon'},
+  {emoji:'🦔',name:'Hedgehog',msg:'A hedgehog waddled in — unbearably cute! 🌰',rarity:'Uncommon'},
+  {emoji:'🐿️',name:'Squirrel',msg:'A squirrel is saving good things for you! 🌰',rarity:'Uncommon'},
+  {emoji:'🦦',name:'Otter',msg:'An otter rolled in just to hang out! 🌊',rarity:'Uncommon'},
+  {emoji:'🐹',name:'Hamster',msg:'A tiny hamster is running laps in your honor! 🏃',rarity:'Uncommon'},
+  {emoji:'🐭',name:'Field Mouse',msg:'A sweet little mouse snuck in to say hi! 🧀',rarity:'Uncommon'},
+  {emoji:'🐰',name:'White Rabbit',msg:'A white rabbit appeared! She believes in you! 🐰',rarity:'Uncommon'},
+  {emoji:'🦝',name:'Raccoon',msg:'A raccoon found your garden and gives it 5 stars! 🌟',rarity:'Uncommon'},
+  {emoji:'🦉',name:'Wise Owl',msg:'An owl says you are doing amazing. 🌙',rarity:'Rare'},
+  {emoji:'🦊',name:'Fox',msg:'A fox respects the hustle. Keep going! 🦊',rarity:'Rare'},
+  {emoji:'🦌',name:'Deer',msg:'A deer stepped gracefully into your garden. 🌸',rarity:'Rare'},
+  {emoji:'🐺',name:'Wolf',msg:'A wolf howled to celebrate your grind! 🌕',rarity:'Rare'},
+  {emoji:'🐨',name:'Koala',msg:'A koala chose your garden for her nap! 🌿',rarity:'Rare'},
+  {emoji:'🦘',name:'Kangaroo',msg:'A kangaroo bounded in with a surprise! 🦘',rarity:'Rare'},
+  {emoji:'🦙',name:'Llama',msg:'A llama is lovingly judging your garden. Approves! 🌾',rarity:'Rare'},
+  {emoji:'🐻',name:'Bear',msg:'A bear wandered over and seems very chill! 🍯',rarity:'Rare'},
+  {emoji:'🐮',name:'Cow',msg:'A spotted cow mooed in approval! 🐄',rarity:'Rare'},
+  {emoji:'🦒',name:'Giraffe',msg:'A giraffe peeked over your fence! 🌿',rarity:'Rare'},
+  {emoji:'🐘',name:'Elephant',msg:'An elephant never forgets how hard you work! 🌸',rarity:'Rare'},
+  {emoji:'🦚',name:'Peacock',msg:'A peacock showed up looking absolutely stunning! ✨',rarity:'Very Rare'},
+  {emoji:'🦜',name:'Parrot',msg:'A parrot flew in and keeps saying "you got this"! 🌺',rarity:'Very Rare'},
+  {emoji:'🦩',name:'Flamingo',msg:'A flamingo strutted in! Standing tall, just like you! 🌸',rarity:'Very Rare'},
+  {emoji:'🦢',name:'Swan',msg:'A graceful swan glided into your garden! ✨',rarity:'Very Rare'},
+  {emoji:'🦅',name:'Eagle',msg:'An eagle soared in — you aim high! 🦅',rarity:'Very Rare'},
+  {emoji:'🦆',name:'Fancy Duck',msg:'A very distinguished duck visited. Quack! 🌿',rarity:'Very Rare'},
+  {emoji:'🦁',name:'Lion',msg:'A lion showed up. She sees a fellow queen! 👑',rarity:'Very Rare'},
+  {emoji:'🐯',name:'Tiger',msg:'A tiger purred into your garden! Fierce & focused! 🌿',rarity:'Very Rare'},
+  {emoji:'🦓',name:'Zebra',msg:'A zebra trotted in — standing out, just like you! 🌾',rarity:'Very Rare'},
+  {emoji:'🐉',name:'Baby Dragon',msg:'A baby dragon landed with gold sparks! ✨',rarity:'Legendary'},
+  {emoji:'🦄',name:'Unicorn',msg:'A unicorn appeared!! 🌈✨',rarity:'Legendary'},
+  {emoji:'🐻‍❄️',name:'Polar Bear',msg:'A rare polar bear wandered in from afar! ❄️✨',rarity:'Legendary'},
+  {emoji:'🦕',name:'Mini Dino',msg:'A tiny dinosaur found your garden!! This is historic! 🦕✨',rarity:'Legendary'},
+  {emoji:'🐲',name:'Garden Dragon',msg:'A jade garden dragon has chosen your garden as home! 🐲✨',rarity:'Legendary'},
+];
+ 
+const LOCKED_MILESTONES={10:5,25:15,50:30,75:22,100:50,150:40,200:80};
+function rollBonusCoins(total){
+  if(LOCKED_MILESTONES[total]!==undefined){const c=LOCKED_MILESTONES[total];return{coins:c,msg:`🎉 Application #${total}! Milestone bonus: +${c} coins!`,type:'milestone'};}
+  const r=Math.random();
+  if(r<0.06){const c=Math.floor(Math.random()*9)+8;return{coins:c,msg:`🌟 Lucky drop! Surprise bonus: +${c} coins!`,type:'jackpot'};}
+  if(r<0.19){const c=Math.floor(Math.random()*4)+3;return{coins:c,msg:`✨ Nice! Bonus coins: +${c}!`,type:'small'};}
+  return null;
+}
+const ANIMAL_MILESTONES=new Set([5,10,15,25,35,50,75,100,150,200]);
+function shouldTriggerAnimal(total){
+  if(ANIMAL_MILESTONES.has(total))return true;
+  if(total>3&&Math.random()<0.10)return true;
+  return false;
+}
+ 
+// ── STORAGE ───────────────────────────────────────────────────────────────────
+const todayKey=()=>new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+const timeNow=()=>new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+const loadJobs=()=>JSON.parse(localStorage.getItem('emmajobs')||'{}');
+const saveJobs=d=>localStorage.setItem('emmajobs',JSON.stringify(d));
+const loadG=()=>JSON.parse(localStorage.getItem('emmagarden6')||'{"coins":0,"inventory":[],"plants":[],"animals":[],"purchaseLog":[]}');
+const saveG=g=>localStorage.setItem('emmagarden6',JSON.stringify(g));
+function totalApplications(){const data=loadJobs();return Object.values(data).reduce((sum,arr)=>sum+(Array.isArray(arr)?arr.length:0),0);}
+function updateMoneyUI(c){document.getElementById('money-count').textContent=c;document.getElementById('header-money').textContent=c;document.getElementById('shop-coins').textContent=c;}
+function normalizeGarden(){const g=loadG();if(typeof g.coins!=='number')g.coins=0;if(!Array.isArray(g.inventory))g.inventory=[];if(!Array.isArray(g.plants))g.plants=[];if(!Array.isArray(g.animals))g.animals=[];if(!Array.isArray(g.purchaseLog))g.purchaseLog=[];saveG(g);return g;}
+function initCoinsIfNeeded(){
+  const total=totalApplications();const g=normalizeGarden();
+  if(g.coins===0&&total>0){g.coins=total;saveG(g);updateMoneyUI(g.coins);showToast('💰 Retroactive coins granted for your '+total+' applications!');}
+}
+ 
+// ── ZOOM — no CSS transform; field always fills container ─────────────────────
+// Items stored in "virtual" coords (0–1 as fraction of canvas size).
+// On render they're placed at virtualCoord * canvasPixelSize.
+let zoom=1;
+const ZMIN=0.4, ZMAX=2.6, ZSTEP=0.2;
+ 
+function getCanvasSize(){
+  const scroll=document.getElementById('field-scroll');
+  const sw=scroll.clientWidth||400;
+  const sh=scroll.clientHeight||360;
+  // At zoom≤1 canvas fills scroll exactly.
+  // At zoom>1 canvas expands so you can scroll.
+  const w=Math.max(sw, sw*zoom);
+  const h=Math.max(sh, sh*zoom);
+  return {w, h, sw, sh};
+}
+ 
+function applyZoom(){
+  const canvas=document.getElementById('field-canvas');
+  const {w,h}=getCanvasSize();
+  canvas.style.width=w+'px';
+  canvas.style.height=h+'px';
+  canvas.style.transform='none'; // never scale the canvas itself
+  document.getElementById('zoom-lbl').textContent=Math.round(zoom*100)+'%';
+  // re-render items at new zoom
+  if(document.getElementById('page-garden').classList.contains('active')){
+    const g=normalizeGarden();
+    renderField(g);
+  }
+}
+function zoomIn(){zoom=Math.min(ZMAX,+(zoom+ZSTEP).toFixed(1));applyZoom();}
+function zoomOut(){zoom=Math.max(ZMIN,+(zoom-ZSTEP).toFixed(1));applyZoom();}
+function zoomReset(){zoom=1;applyZoom();}
+window.addEventListener('resize',()=>{if(document.getElementById('page-garden').classList.contains('active'))applyZoom();});
+ 
+function showTab(name,el){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('page-'+name).classList.add('active');el.classList.add('active');if(name==='shop')renderShop();if(name==='garden')renderGarden();}
+ 
+function render(){
+  const data=loadJobs();const today=todayKey();const g=normalizeGarden();
+  document.getElementById('today-count').textContent=(data[today]||[]).length;
+  document.getElementById('total-count').textContent=totalApplications();
+  updateMoneyUI(g.coins);
+  const log=document.getElementById('log');log.innerHTML='';
+  const days=Object.keys(data).sort((a,b)=>new Date(b)-new Date(a));
+  if(!days.length){log.innerHTML='<p class="empty">No applications yet — you got this! 🌱</p>';return;}
+  days.forEach(day=>{const entries=data[day]||[];const block=document.createElement('div');block.className='day-block';block.innerHTML=`<div class="day-head"><span class="date">${day===today?'📅 Today':day}</span><span class="badge">${entries.length} app${entries.length!==1?'s':''}</span></div><div class="day-entries">${entries.map(t=>`<div class="entry">${t}</div>`).join('')}</div>`;log.appendChild(block);});
+}
+ 
+let curCat='all';
+function setCat(cat,el){curCat=cat;document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderShop();}
+function renderShop(){
+  const g=normalizeGarden();updateMoneyUI(g.coins);const grid=document.getElementById('seed-grid');grid.innerHTML='';
+  const list=curCat==='all'?SEEDS:SEEDS.filter(s=>s.cat===curCat);
+  list.forEach(s=>{const owned=g.inventory.filter(i=>i.id===s.id).length;const canBuy=g.coins>=s.cost;const card=document.createElement('div');card.className='seed-card';card.innerHTML=`<span class="emoji">${s.emoji}</span><div class="sname">${s.name}</div><div class="sdesc">${s.desc}</div><div class="sprice">💰 ${s.cost}${owned?`<span class="owned-badge">×${owned} in bag</span>`:''}</div><button class="buy-btn" ${canBuy?'':'disabled'} onclick="buySeed('${s.id}')">${canBuy?'Buy':'Need coins'}</button>`;grid.appendChild(card);});
+}
+function buySeed(id){
+  const s=SEEDS.find(x=>x.id===id);if(!s)return;
+  const g=normalizeGarden();if(g.coins<s.cost){showToast('Not enough coins yet!');return;}
+  g.coins-=s.cost;g.purchaseLog.push({item:s.id,amount:s.cost,time:Date.now()});g.inventory.push({id:s.id,emoji:s.emoji,name:s.name});
+  saveG(g);updateMoneyUI(g.coins);renderShop();playSparkle();miniConfetti();showToast(s.name+' added to bag! 🌱');
+}
+ 
+// ── GARDEN RENDER ─────────────────────────────────────────────────────────────
+// Plant/animal positions stored as fractions (0–1) of the virtual canvas.
+// Rendered at fraction * currentCanvasPixelSize.
+function virtualToScreen(vx,vy){
+  const {w,h}=getCanvasSize();
+  return {x:vx*w, y:vy*h};
+}
+function screenToVirtual(sx,sy){
+  const {w,h}=getCanvasSize();
+  return {vx:sx/w, vy:sy/h};
+}
+ 
+// Migrate old absolute-px positions to fractional if needed.
+// Old positions were stored assuming a ~900x500 canvas.
+const LEGACY_W=900, LEGACY_H=500;
+function migratePlant(p){
+  if(p.vx!==undefined)return p; // already fractional
+  return {...p, vx:(p.x||0)/LEGACY_W, vy:(p.y||0)/LEGACY_H};
+}
+function migrateAnimal(a){
+  if(a.vx!==undefined)return a;
+  return {...a, vx:(a.x||0)/LEGACY_W, vy:(a.y||0)/LEGACY_H};
+}
+ 
+function renderGarden(){
+  // Ensure canvas size is correct first
+  const canvas=document.getElementById('field-canvas');
+  const {w,h}=getCanvasSize();
+  canvas.style.width=w+'px';canvas.style.height=h+'px';canvas.style.transform='none';
+  document.getElementById('zoom-lbl').textContent=Math.round(zoom*100)+'%';
+  const g=normalizeGarden();
+  // Migrate old data
+  g.plants=g.plants.map(migratePlant);
+  g.animals=g.animals.map(migrateAnimal);
+  saveG(g);
+  renderField(g);renderInventory(g);renderAnimalsLog(g);
+}
+ 
+function makeFieldDraggable(el,idx,isAnimal){
+  let sx=0,sy=0,sl=0,st=0,active=false;
+  function start(cx,cy){
+    active=true;sx=cx;sy=cy;
+    sl=parseFloat(el.style.left)||0;
+    st=parseFloat(el.style.top)||0;
+    el.classList.add('dragging');
+  }
+  function move(cx,cy){
+    if(!active)return;
+    const canvas=document.getElementById('field-canvas');
+    const maxX=canvas.offsetWidth-(el.offsetWidth||40);
+    const maxY=canvas.offsetHeight-(el.offsetHeight||40);
+    el.style.left=Math.max(0,Math.min(maxX,sl+(cx-sx)))+'px';
+    el.style.top=Math.max(0,Math.min(maxY,st+(cy-sy)))+'px';
+  }
+  function end(){
+    if(!active)return;active=false;el.classList.remove('dragging');
+    const g=normalizeGarden();
+    const screenX=parseFloat(el.style.left);
+    const screenY=parseFloat(el.style.top);
+    const {vx,vy}=screenToVirtual(screenX,screenY);
+    if(isAnimal&&g.animals[idx]){g.animals[idx].vx=vx;g.animals[idx].vy=vy;}
+    if(!isAnimal&&g.plants[idx]){g.plants[idx].vx=vx;g.plants[idx].vy=vy;}
+    saveG(g);
+  }
+  el.addEventListener('mousedown',e=>{if(e.button!==0)return;e.preventDefault();e.stopPropagation();start(e.clientX,e.clientY);const mm=ev=>move(ev.clientX,ev.clientY);const mu=()=>{end();document.removeEventListener('mousemove',mm);document.removeEventListener('mouseup',mu);};document.addEventListener('mousemove',mm);document.addEventListener('mouseup',mu);});
+  el.addEventListener('touchstart',e=>{e.stopPropagation();if(e.touches.length===1){const t=e.touches[0];start(t.clientX,t.clientY);}},{passive:true});
+  el.addEventListener('touchmove',e=>{if(e.touches.length===1){e.preventDefault();const t=e.touches[0];move(t.clientX,t.clientY);}},{passive:false});
+  el.addEventListener('touchend',end);
+}
+ 
+function renderField(g){
+  const canvas=document.getElementById('field-canvas');
+  canvas.querySelectorAll('.gitem').forEach(e=>e.remove());
+  // Base emoji size at zoom=1; scales with zoom
+  const baseSize=1.8;
+  g.plants.forEach((p,idx)=>{
+    const age=Date.now()-p.plantedAt;
+    let stage=0;if(age>=20000)stage=2;else if(age>=8000)stage=1;
+    const pct=stage===2?100:stage===1?Math.min(100,((age-8000)/12000)*100):Math.min(100,(age/8000)*100);
+    const emoji=stage===0?'🌰':stage===1?'🪴':p.emoji;
+    const sizeRem=(stage===0?0.5:stage===1?0.7:baseSize)*zoom;
+    const sc=['seed-s','sprout-s',''][stage];
+    const pos=virtualToScreen(p.vx||0,p.vy||0);
+    const el=document.createElement('div');
+    el.className=`gitem ${sc}`;
+    el.style.left=pos.x+'px';el.style.top=pos.y+'px';
+    el.innerHTML=`<div class="gi-e" style="font-size:${sizeRem}rem">${emoji}</div><div class="gi-lbl">${p.name}</div><div class="gi-bar"><div class="gi-fill" style="width:${pct}%"></div></div>`;
+    makeFieldDraggable(el,idx,false);
+    let clicks=0;
+    el.addEventListener('click',e=>{e.stopPropagation();clicks++;if(clicks>=2){const g=normalizeGarden();g.plants.splice(idx,1);saveG(g);renderGarden();showToast('Plant removed ✕');}setTimeout(()=>clicks=0,500);});
+    canvas.appendChild(el);
+    if(stage<2){const ms=stage===0?8000-age:20000-age;setTimeout(()=>{if(document.getElementById('page-garden').classList.contains('active'))renderGarden();},ms+100);}
+  });
+  g.animals.forEach((a,idx)=>{
+    const sizeRem=baseSize*zoom;
+    const pos=virtualToScreen(a.vx||0,a.vy||0);
+    const el=document.createElement('div');
+    el.className='gitem animal-item';
+    el.style.left=pos.x+'px';el.style.top=pos.y+'px';
+    el.innerHTML=`<div class="gi-e" style="font-size:${sizeRem}rem">${a.emoji}</div><div class="gi-lbl">${a.name}</div>`;
+    makeFieldDraggable(el,idx,true);
+    canvas.appendChild(el);
+  });
+}
+ 
+document.getElementById('field-scroll').addEventListener('dragover',e=>e.preventDefault());
+document.getElementById('field-scroll').addEventListener('drop',e=>{
+  e.preventDefault();
+  const seedId=e.dataTransfer.getData('seedId');if(!seedId)return;
+  const g=normalizeGarden();
+  const idx=g.inventory.findIndex(i=>i.id===seedId);if(idx===-1)return;
+  const seed=g.inventory[idx];
+  const canvas=document.getElementById('field-canvas');
+  const rect=canvas.getBoundingClientRect();
+  const screenX=Math.max(4,Math.min(canvas.offsetWidth-40,e.clientX-rect.left));
+  const screenY=Math.max(4,Math.min(canvas.offsetHeight-40,e.clientY-rect.top));
+  const {vx,vy}=screenToVirtual(screenX,screenY);
+  g.plants.push({id:seed.id,emoji:seed.emoji,name:seed.name,plantedAt:Date.now(),vx,vy});
+  g.inventory.splice(idx,1);
+  saveG(g);playSparkle();renderGarden();showToast(seed.name+' planted! 🌱');
+});
+ 
+function renderInventory(g){
+  const inv=document.getElementById('inventory');inv.innerHTML='';
+  const groups={};g.inventory.forEach(s=>{if(!groups[s.id])groups[s.id]={seed:s,cnt:0};groups[s.id].cnt++;});
+  if(!Object.keys(groups).length){inv.innerHTML='<span class="inv-empty">No seeds — buy some from the shop! 🛒</span>';return;}
+  Object.values(groups).forEach(({seed,cnt})=>{const el=document.createElement('div');el.className='inv-seed';el.draggable=true;el.innerHTML=`<span class="is-e">${seed.emoji}</span><span class="is-n">${seed.name}${cnt>1?' ×'+cnt:''}</span>`;el.addEventListener('dragstart',e=>e.dataTransfer.setData('seedId',seed.id));inv.appendChild(el);});
+}
+function renderAnimalsLog(g){
+  const grid=document.getElementById('animals-grid');grid.innerHTML='';
+  if(!g.animals.length){grid.innerHTML='<p style="font-size:.73rem;color:var(--clay-l);font-style:italic">Keep applying — surprise animals visit at milestones and randomly! 🐾</p>';return;}
+  g.animals.forEach(a=>{const tag=document.createElement('div');tag.className='animal-tag';tag.innerHTML=`<span class="at-e">${a.emoji}</span><div><div class="at-n">${a.name}</div><div class="at-r">${a.rarity} · app #${a.apps}</div></div>`;grid.appendChild(tag);});
+}
+ 
+function triggerAnimalVisit(total){
+  const g=normalizeGarden();
+  if(g.animals.some(a=>a.apps===total))return;
+  const weights={Common:40,Uncommon:30,Rare:18,'Very Rare':9,Legendary:3};
+  const pool=[];ALL_ANIMALS.forEach(a=>{const w=weights[a.rarity]||10;for(let i=0;i<w;i++)pool.push(a);});
+  const animal=pool[Math.floor(Math.random()*pool.length)];
+  const vx=0.1+Math.random()*0.8;
+  const vy=0.05+Math.random()*0.8;
+  g.animals.push({...animal,apps:total,vx,vy});saveG(g);
+  setTimeout(()=>{
+    document.getElementById('arrival-emoji').textContent=animal.emoji;
+    document.getElementById('arrival-title').textContent=animal.name+' arrived!';
+    document.getElementById('arrival-sub').textContent=animal.msg;
+    document.getElementById('animal-arrival').classList.add('show');
+    playAnimalSound();
+  },700);
+}
+function closeArrival(){document.getElementById('animal-arrival').classList.remove('show');if(document.getElementById('page-garden').classList.contains('active'))renderGarden();}
+ 
+let redoStack=[];
+document.getElementById('apply-btn').addEventListener('click',()=>{
+  const data=loadJobs();const today=todayKey();
+  if(!Array.isArray(data[today]))data[today]=[];
+  data[today].push(timeNow());saveJobs(data);redoStack=[];
+  const total=totalApplications();const g=normalizeGarden();
+  g.coins+=1;
+  const bonus=rollBonusCoins(total);
+  if(bonus){g.coins+=bonus.coins;const b=document.getElementById('milestone-banner');b.style.display='block';b.textContent=bonus.msg;setTimeout(()=>b.style.display='none',3500);}
+  if(shouldTriggerAnimal(total))triggerAnimalVisit(total);
+  saveG(g);updateMoneyUI(g.coins);render();
+  if(document.getElementById('page-shop').classList.contains('active'))renderShop();
+  launchConfetti();playSparkle();
+});
+document.getElementById('undo-btn').addEventListener('click',()=>{
+  const data=loadJobs();const today=todayKey();
+  if(data[today]?.length>0){redoStack.push({day:today,time:data[today].pop()});if(!data[today].length)delete data[today];saveJobs(data);const g=normalizeGarden();g.coins=Math.max(0,g.coins-1);saveG(g);render();updateMoneyUI(g.coins);}
+});
+document.getElementById('redo-btn').addEventListener('click',()=>{
+  if(!redoStack.length){showToast('Nothing to redo!');return;}
+  const {day,time}=redoStack.pop();const data=loadJobs();if(!data[day])data[day]=[];data[day].push(time);saveJobs(data);
+  const total=totalApplications();const g=normalizeGarden();g.coins+=1;
+  const bonus=rollBonusCoins(total);if(bonus)g.coins+=bonus.coins;
+  if(shouldTriggerAnimal(total))triggerAnimalVisit(total);
+  saveG(g);render();updateMoneyUI(g.coins);
+});
+document.getElementById('reset-btn').addEventListener('click',()=>{
+  if(confirm('Reset ALL data?')){localStorage.removeItem('emmajobs');localStorage.removeItem('emmagarden6');redoStack=[];render();}
+});
+ 
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
+function playSparkle(){try{const ctx=new(window.AudioContext||window.webkitAudioContext)();[523,659,784,1047].forEach((f,i)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.type='sine';o.frequency.setValueAtTime(f,ctx.currentTime+i*.08);g.gain.setValueAtTime(.10,ctx.currentTime+i*.08);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+i*.08+.25);o.start(ctx.currentTime+i*.08);o.stop(ctx.currentTime+i*.08+.3);});}catch(e){}}
+function playAnimalSound(){playSparkle();}
+function launchConfetti(){const cv=document.getElementById('confetti'),ctx=cv.getContext('2d');cv.width=innerWidth;cv.height=innerHeight;const cols=['#C4847A','#8B5A3A','#8A9E74','#D4C4A0','#C9A84C','#DBA99E'];const pts=Array.from({length:100},()=>({x:Math.random()*cv.width,y:Math.random()*-cv.height*.3,w:Math.random()*10+4,h:Math.random()*5+3,c:cols[Math.floor(Math.random()*cols.length)],r:Math.random()*6.28,vx:(Math.random()-.5)*3,vy:Math.random()*3+1.5,vr:(Math.random()-.5)*.15,op:1}));let f=0;(function draw(){ctx.clearRect(0,0,cv.width,cv.height);let alive=false;pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.07;p.r+=p.vr;if(f>55)p.op=Math.max(0,p.op-.013);if(p.y<cv.height+20)alive=true;ctx.save();ctx.globalAlpha=p.op;ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.c;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();});f++;if(alive)requestAnimationFrame(draw);else ctx.clearRect(0,0,cv.width,cv.height);})();}
+function miniConfetti(){launchConfetti();}
+ 
+render();
+initCoinsIfNeeded();
+</script>
+</body>
+</html>
