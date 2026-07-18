@@ -211,3 +211,11 @@ a {
     min-height: 0;
   }
 }
+#typewriter::after {
+  content: "|";
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
