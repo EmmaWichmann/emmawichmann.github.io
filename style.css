@@ -219,3 +219,64 @@ a {
 @keyframes blink {
   50% { opacity: 0; }
 }
+/* Layout rules to split the card space */
+.hero-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.hero-text {
+  flex: 1; /* Takes up the left side space smoothly */
+}
+
+.hero-illustration {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 20px;
+  user-select: none;
+}
+
+/* Elegant, slow sway animation */
+.swaying-flower {
+  transform-origin: bottom center;
+  animation: elegantSway 6s ease-in-out infinite alternate;
+}
+
+@keyframes elegantSway {
+  0% { transform: rotate(-4deg); }
+  100% { transform: rotate(6deg); }
+}
+
+/* A soft, ambient earth-tone glow behind the flower */
+.glow-sparkle {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  background: #E6CCB2;
+  filter: blur(45px);
+  opacity: 0.25;
+  z-index: 0;
+  animation: pulseGlow 5s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% { transform: scale(0.85); opacity: 0.2; }
+  100% { transform: scale(1.15); opacity: 0.35; }
+}
+
+/* Responsive adjustment: stacks them beautifully on mobile screens */
+@media (max-width: 768px) {
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-illustration {
+    padding-right: 0;
+    margin-top: 20px;
+  }
+}
