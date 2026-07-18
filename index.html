@@ -13,63 +13,56 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-   <section class="hero-container">
-  <!-- Left Side: Your Text Content -->
-  <div class="hero-text-content">
-    <h1 class="hero-title">Hi, I’m Emma. I transitioned from the lab bench to the digital build.</h1>
-    
-    <p class="hero-description">
-      My background is rooted in the life sciences—from analyzing large-scale research datasets to navigating the high-pressure environment of medical school coursework. Along the way, I realized my true passion lies in building the structured tools and systems that keep operations running smoothly.
-    </p>
-    
-    <p class="hero-description">
-      Today, I combine my scientific precision with self-directed engineering across <strong>Python</strong>, JavaScript, and front-end development. Through projects like my <a href="https://emmawichmann.github.io/Coding-Learning-Hub/" target="_blank" class="text-link">Coding Learning Hub</a>, I build functional tools to master complex concepts.
-    </p>
-    
-    <p class="hero-description">
-      Whether you need someone to automate data pipelines, systematically test software quality, or keep a fast-paced laboratory coordinated, I bring a high-achieving learner's mindset that adapts to any technical challenge.
-    </p>
+    <main class="page-wrapper">
+      
+      <!-- HERO CONTAINER WITH INTEGRATED SPLIT LAYOUT -->
+      <section class="hero-container">
+        <!-- Left Side: Content & Actions -->
+        <div class="hero-text-content">
+          <h1 class="hero-title">
+            Hi, I’m Emma. I'm a builder focused on <span id="typewriter"></span><span class="cursor">|</span>
+          </h1>
+          
+          <p class="hero-description">
+            My background is rooted in the life sciences—from analyzing large-scale research datasets to navigating the high-pressure environment of medical school coursework[cite: 1]. Along the way, I realized my true passion lies in building the structured tools and systems that keep operations running smoothly.
+          </p>
+          
+          <p class="hero-description">
+            Today, I combine my scientific precision with self-directed engineering across <strong>Python</strong>, JavaScript, and front-end development. Through projects like my <a href="https://emmawichmann.github.io/Coding-Learning-Hub/" target="_blank" class="text-link">Coding Learning Hub</a>, I build functional tools to master complex concepts.
+          </p>
+          
+          <p class="hero-description">
+            Whether you need someone to automate data pipelines, systematically test software quality, or keep a fast-paced laboratory coordinated, I bring a high-achieving learner's mindset that adapts to any technical challenge.
+          </p>
 
-    <!-- Call to Action Buttons -->
-    <div class="hero-actions">
-      <a href="#projects" class="btn btn-primary">View My Projects</a>
-      <a href="mailto:emma.1.wichmann@gmail.com" class="btn btn-secondary">Let's Connect</a>
-    </div>
-  </div>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">View My Projects</a>
+            <a href="mailto:emma.1.wichmann@gmail.com" class="btn btn-secondary">Let's Connect</a>
+          </div>
 
-  <!-- Right Side: Your Illustration/Visual Placeholder -->
-  <div class="hero-visual">
-    <!-- You can replace this placeholder div with an <img> tag or an SVG graphic later! -->
-    <div class="illustration-placeholder">
-      <span>[ Visual Illustration Here ]</span>
-    </div>
-  </div>
-</section>
           <div class="hero-links">
             <a class="primary-link" href="https://github.com/EmmaWichmann" target="_blank" rel="noreferrer">GitHub</a>
             <a class="secondary-link" href="https://emmawichmann.github.io/Coding-Learning-Hub/" target="_blank" rel="noreferrer">Coding Learning Hub</a>
           </div>
         </div>
 
-        <!-- THE NEW DECORATIVE ELEMENT SPACE FOR THE RIGHT SIDE -->
-        <div class="hero-illustration">
-          <svg class="swaying-flower" width="120" height="170" viewBox="0 0 100 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Stem -->
-            <path d="M50 150C50 100 40 70 50 20" stroke="#8C6247" stroke-width="3" stroke-linecap="round"/>
-            <!-- Leaves / Petals (Using premium earth tones) -->
-            <path d="M50 70C30 60 25 40 45 45C45 45 50 55 50 70Z" fill="#D4A373"/>
-            <path d="M52 90C72 80 77 60 57 65C57 65 52 75 52 90Z" fill="#D4A373"/>
-            <path d="M50 20C35 5 65 5 50 20Z" fill="#E6CCB2"/>
-          </svg>
-          <div class="glow-sparkle"></div>
-        </div>
-      </section>
-        <div class="hero-links">
-          <a class="primary-link" href="https://github.com/EmmaWichmann" target="_blank" rel="noreferrer">GitHub</a>
-          <a class="secondary-link" href="https://emmawichmann.github.io/Coding-Learning-Hub/" target="_blank" rel="noreferrer">Coding Learning Hub</a>
+        <!-- Right Side: Beautiful Decorative Earth Element -->
+        <div class="hero-visual">
+          <div class="hero-illustration">
+            <svg class="swaying-flower" width="120" height="170" viewBox="0 0 100 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Stem -->
+              <path d="M50 150C50 100 40 70 50 20" stroke="#8C6247" stroke-width="3" stroke-linecap="round"/>
+              <!-- Leaves / Petals (Using premium earth tones) -->
+              <path d="M50 70C30 60 25 40 45 45C45 45 50 55 50 70Z" fill="#D4A373"/>
+              <path d="M52 90C72 80 77 60 57 65C57 65 52 75 52 90Z" fill="#D4A373"/>
+              <path d="M50 20C35 5 65 5 50 20Z" fill="#E6CCB2"/>
+            </svg>
+            <div class="glow-sparkle"></div>
+          </div>
         </div>
       </section>
 
+      <!-- ABOUT SECTION -->
       <section class="card about">
         <h2>About</h2>
         <p>
@@ -90,7 +83,8 @@
         </p>
       </section>
 
-      <section class="card featured-projects">
+      <!-- FEATURED PROJECTS SECTION -->
+      <section id="projects" class="card featured-projects">
         <div class="section-heading">
           <h2>Featured Projects</h2>
           <p>A small set of projects that best show what I am building right now.</p>
@@ -103,7 +97,7 @@
               A motivational job-search project with a garden and reward system to make applying
               feel more manageable and encouraging.
             </p>
-            <a href="http://127.0.0.1:5000/" target="_blank" rel="noreferrer">Open project</a>
+            <a href="https://emmawichmann.github.io/emmagetshired/" target="_blank" rel="noreferrer">Open project</a>
           </article>
 
           <article class="project-card">
@@ -135,13 +129,14 @@
         </div>
       </section>
 
+      <!-- FOCUS & VALUES GRID -->
       <section class="split-layout">
         <section class="card">
           <h2>Current Focus</h2>
           <ul class="tag-list">
-            <li>HTML</li>
-            <li>CSS</li>
+            <li>HTML / CSS</li>
             <li>JavaScript</li>
+            <li>Python (Data & Automation)</li>
             <li>SwiftUI</li>
             <li>UX / product thinking</li>
             <li>Accessibility</li>
@@ -160,7 +155,7 @@
         </section>
       </section>
     </main>
+
+    <script src="script.js"></script>
   </body>
-  <script src="script.js"></script>
-</body>
 </html>
