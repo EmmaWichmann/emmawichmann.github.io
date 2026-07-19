@@ -1,20 +1,14 @@
-/* ==========================================================================
-   DESIGN SYSTEM TOKENS & VARIABLE SETUP
-   ========================================================================== */
 :root {
-  --bg-primary: #ffffff;
-  --text-primary: #111111;
-  --text-muted: #555555;
-  --accent-color: #c8a2c8; /* Soft earth/pastel tone */
-  --link-color: #0000ee;
-  --border-color: #e0e0e0;
-  --max-width: 1100px;
-  --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --bg-color: #ffffff;
+  --text-main: #111111;
+  --text-muted: #333333;
+  --accent-earth: #b5836a;
+  --link-blue: #0022ee;
+  --border-light: #e6e6e6;
+  --max-width: 1200px;
+  --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* ==========================================================================
-   BASE STYLES & TYPOGRAPHY
-   ========================================================================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -22,11 +16,11 @@
 }
 
 body {
-  font-family: var(--font-stack);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  font-family: var(--font-base);
+  background-color: var(--bg-color);
+  color: var(--text-main);
   line-height: 1.6;
-  padding: 2rem 1rem;
+  padding: 3rem 1.5rem;
 }
 
 .container {
@@ -34,104 +28,128 @@ body {
   margin: 0 auto;
 }
 
-/* ==========================================================================
-   HERO & HEADER LAYOUT
-   ========================================================================== */
 header {
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
 }
 
 .title-role {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   color: var(--text-muted);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 2.8rem;
+  font-weight: 800;
   margin-bottom: 1.5rem;
-  letter-spacing: -0.5px;
+  letter-spacing: -1px;
 }
 
 .hero-bio {
   font-size: 1.1rem;
   color: var(--text-muted);
-  max-width: 800px;
-  margin-bottom: 1.5rem;
+  max-width: 900px;
+  margin-bottom: 1.25rem;
 }
 
-.hero-links a {
-  color: var(--link-color);
-  text-decoration: underline;
-  margin-right: 1.5rem;
-  font-weight: 500;
-}
-
-/* ==========================================================================
-   LAYOUT STRUCTURE: SIDE-BY-SIDE / GRID
-   ========================================================================== */
-.main-layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
+.hero-links {
   margin-top: 2rem;
 }
 
-@media (min-width: 768px) {
+.hero-links a {
+  color: var(--link-blue);
+  text-decoration: underline;
+  margin-right: 2rem;
+  font-weight: 600;
+}
+
+.status-badge {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background-color: #f5f5f7;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+  margin-bottom: 3rem;
+}
+
+.main-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+}
+
+@media (min-width: 992px) {
   .main-layout {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-section {
-  margin-bottom: 2rem;
-}
-
 h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.5rem;
-}
-
-/* ==========================================================================
-   COMPONENTS & ASSETS
-   ========================================================================== */
-.status-badge {
-  display: inline-block;
-  font-size: 0.85rem;
-  background-color: #f0f0f0;
-  padding: 0.25rem 0.75rem;
-  border-radius: 4px;
-  margin-bottom: 2rem;
-  font-weight: 500;
-}
-
-.visual-asset {
-  max-width: 150px;
-  height: auto;
+  font-size: 1.6rem;
+  font-weight: 700;
   margin-bottom: 1.5rem;
-  display: block;
+  border-bottom: 2px solid var(--text-main);
+  padding-bottom: 0.5rem;
+  letter-spacing: -0.5px;
 }
 
-/* Project Card Layouts */
+.about-section p {
+  font-size: 1.05rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-muted);
+}
+
+.section-intro {
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+  color: var(--text-muted);
+}
+
 .project-list {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
 }
 
-.project-card {
-  border: 1px solid var(--border-color);
-  padding: 1.5rem;
-  border-radius: 6px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+@media (min-width: 600px) {
+  .project-list {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
-.project-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+.project-card {
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 1.5rem;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+}
+
+.project-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.project-link {
+  color: var(--link-blue);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.project-link:hover {
+  text-decoration: underline;
 }
