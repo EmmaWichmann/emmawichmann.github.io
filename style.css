@@ -83,40 +83,7 @@ p, li, a {
   font-weight: 700;
 }
 
-/* --- UNDER CONSTRUCTION PULSE BADGE --- */
-.construction-notice {
-  font-size: 0.9rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #b57a55 !important;
-  background: rgba(165, 93, 58, 0.1) !important;
-  padding: 8px 16px !important;
-  border-radius: 999px !important;
-  display: inline-block !important;
-  margin-bottom: 20px !important;
-  width: fit-content;
-  border: 1px solid rgba(165, 93, 58, 0.2);
-  animation: noticePulse 2s ease-in-out infinite !important;
-}
-
-@keyframes noticePulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(165, 93, 58, 0.3);
-  }
-  50% {
-    transform: scale(1.02);
-    box-shadow: 0 0 14px 4px rgba(165, 93, 58, 0.2);
-    background: rgba(165, 93, 58, 0.15) !important;
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(165, 93, 58, 0);
-  }
-}
-
-/* --- HERO GRID --- */
+/* --- HERO CORE GRID LAYOUT --- */
 .hero-container {
   display: grid;
   grid-template-columns: 1.3fr 0.7fr;
@@ -189,7 +156,7 @@ p, li, a {
   min-height: 90px;
 }
 
-/* --- SPLIT LAYOUT --- */
+/* --- BOTTOM SPLIT LAYOUT --- */
 .split-layout {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -223,7 +190,41 @@ p, li, a {
   margin-bottom: 8px;
 }
 
-/* --- VISUAL INTERACTIVE ENGINE --- */
+/* --- CHANGELOG STATUS STYLING --- */
+.status-log {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(165, 93, 58, 0.06);
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  margin-top: 24px;
+  width: fit-content;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  display: inline-block;
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0% { opacity: 0.3; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 0.3; transform: scale(0.9); }
+}
+
+.status-text {
+  font-size: 0.85rem !important;
+  margin: 0 !important;
+  color: var(--muted) !important;
+}
+
+/* --- VISUAL ELEMENTS --- */
 .hero-visual {
   display: flex;
   justify-content: center;
@@ -258,6 +259,7 @@ p, li, a {
   z-index: 1;
 }
 
+/* --- TYPEWRITER CURSOR --- */
 .cursor {
   color: var(--accent);
   font-weight: 700;
@@ -268,6 +270,7 @@ p, li, a {
   50% { opacity: 0; }
 }
 
+/* --- RESPONSIVE MOBILE --- */
 @media (max-width: 840px) {
   .hero-container, .project-grid, .split-layout {
     grid-template-columns: 1fr;
