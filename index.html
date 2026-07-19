@@ -1,148 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Emma Wichmann | Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <main class="page-wrapper">
+<div class="hero-visual">
+  <div class="hero-illustration">
+    <!-- The glowing background circle -->
+    <div class="glow-sparkle"></div>
 
-      <!-- SLEEK ACTIVE BUILD TRACKER -->
-          <div class="status-log">
-            <span class="status-dot"></span>
-            <p class="status-text"><strong>Status:</strong> Active Build (In Progress)</p>
-          </div>
-        </section>
-      
-      <!-- HERO CONTAINER WITH NAME TYPEWRITER -->
-      <section class="card hero-card-wrapper">
-        <div class="hero-container">
-          
-          <div class="hero-text-content">
-            <h1 class="hero-title">
-              Hi, I’m <span id="typewriter"></span><span class="cursor">|</span>
-            </h1>
-            
-            <p class="hero-description">
-              I am a cross-functional builder specializing in the intersection of technical engineering and organizational execution. Backed by a rigorous background in the life sciences, I engineer tools and workflows that bridge the gap between complex data and real-world human operations.
-            </p>
-            
-            <p class="hero-description">
-              Today, I combine my analytical precision with self-directed software engineering across <strong>Python</strong>, JavaScript, and modern front-end frameworks. Whether architecting data pipelines, optimizing workflows, or scaling code quality, I design structured digital systems that solve real-world problems.
-            </p>
+    <!-- The flower element on top -->
+    <svg class="swaying-flower" width="100" height="150" viewBox="0 0 100 150">
+      <!-- Your SVG flower art goes here -->
+      <circle cx="50" cy="50" r="20" fill="var(--accent)" />
+      <line x1="50" y1="70" x2="50" y2="150" stroke="var(--muted)" stroke-width="4" />
+    </svg>
 
-            <div class="hero-actions">
-              <a href="#projects" class="btn btn-primary">View My Projects</a>
-              <a href="mailto:emma.1.wichmann@gmail.com" class="btn btn-secondary">Let's Connect</a>
-              <a class="btn btn-secondary" href="https://github.com/EmmaWichmann" target="_blank" rel="noreferrer">GitHub</a>
-            </div>
-          </div>
+    <!-- The status log stacked cleanly underneath -->
+    <div class="status-log">
+      <span class="status-dot"></span>
+      <p class="status-text" id="garden-status">Growing</p>
+    </div>
+  </div>
+</div>
 
-          <div class="hero-visual">
-            <div class="hero-illustration">
-              <svg class="swaying-flower" width="120" height="170" viewBox="0 0 100 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 150C50 100 40 70 50 20" stroke="#8C6247" stroke-width="3" stroke-linecap="round"/>
-                <path d="M50 70C30 60 25 40 45 45C45 45 50 55 50 70Z" fill="#D4A373"/>
-                <path d="M52 90C72 80 77 60 57 65C57 65 52 75 52 90Z" fill="#D4A373"/>
-                <path d="M50 20C35 5 65 5 50 20Z" fill="#E6CCB2"/>
-              </svg>
-              <div class="glow-sparkle"></div>
-            </div>
-          </div>
+<!-- JavaScript to dynamically update or control the status text -->
+<script>
+  // Quick helper to change the status string when you need to update it
+  function updateGardenStatus(newStatus) {
+    const statusElement = document.getElementById('garden-status');
+    if (statusElement) {
+      statusElement.textContent = newStatus;
+    }
+  }
 
-        </div>
-      </section>
-
-      <!-- BIO / ABOUT SECTION -->
-      <section class="card about-section">
-        <h2>About & Philosophy</h2>
-        <p>
-          I began exploring code while studying for the MCAT and customizing Anki cards, then continued building through self-directed projects focused on learning, accessibility, communication, and everyday problem-solving. My background in the life sciences shaped the way I approach product work: with empathy, precision, and a strong bias toward tools that make complex tasks feel more manageable.
-        </p>
-        <p>
-          I have a strong interest in AI-assisted workflows and prompt-based problem solving, using tools such as Claude, Codex, ChatGPT, Gemini, and Copilot to accelerate research, testing, iteration, and learning. At the same time, I care deeply about understanding the underlying code itself, building the judgment to balance AI leverage with real technical fluency. I am especially interested in QA testing, health-tech, accessibility-minded product work, and front-end experiences that feel thoughtful, useful, and human.
-        </p>
-      </section>
-
-      <!-- FEATURED PROJECTS SECTION -->
-      <section id="projects" class="card featured-projects">
-        <div class="section-heading">
-          <h2>Featured Projects</h2>
-          <p>A collection of tools engineered to solve real-world problems and track continuous growth.</p>
-        </div>
-
-        <article class="project-card">
-            <h3>Outfit Archive</h3>
-            <p>A curated digital lookbook and wardrobe tracking system engineered to organize everyday style aesthetics and color palettes.</p>
-            <!-- UPDATED LINK HERE -->
-            <a href="https://emmawichmann.github.io/outfit-archive/#style-me" target="_blank" rel="noreferrer">Open project</a>
-          </article>
-
-       <div class="project-grid">
-          <!-- EMMA GETS HIRED V2 -->
-          <article class="project-card">
-            <h3>Emma Gets Hired (v2)</h3>
-            <p><strong>[Under Construction]</strong> A motivational job-search tracking pipeline with a gamified garden system. Re-engineered from the ground up to master backend engineering with <strong>Python</strong>, <strong>SQL</strong>, and database management.</p>
-            <a href="https://github.com/EmmaWichmann/emmagetshiredv2" target="_blank" rel="noreferrer">View Repository</a>
-          </article>
-
-          <!-- CAREER COMPASS -->
-          <article class="project-card">
-            <h3>Career Compass</h3>
-            <p>An interactive utility tool built to navigate career paths, track target industries, and align operational skills with front-end deployment.</p>
-            <a href="https://emmawichmann.github.io/careercompass/" target="_blank" rel="noreferrer">Open Application</a>
-          </article>
-
-          <article class="project-card">
-            <h3>Sage and Speak</h3>
-            <p>A personal speech-related app designed to optimize communication access. This is one of the projects I most want to keep improving.</p>
-            <a href="https://emmawichmann.github.io/sagespeak/" target="_blank" rel="noreferrer">Open project</a>
-          </article>
-
-          <article class="project-card">
-            <h3>Music Mood App</h3>
-            <p>A front-end project for saving songs by mood while practicing HTML, CSS, and JavaScript through visible, interactive features.</p>
-            <a href="https://emmawichmann.github.io/musicmoodapp/" target="_blank" rel="noreferrer">Open project</a>
-          </article>
-        </div>
-      </section>
-
-      <!-- BOTTOM SPLIT LAYOUT -->
-      <section class="split-layout">
-        <section class="card">
-          <h2>Current Focus</h2>
-          <ul class="tag-list">
-            <li>Software Engineering</li>
-            <li>Python Scripting</li>
-            <li>JavaScript</li>
-            <li>SwiftUI</li>
-            <li>Data Engineering</li>
-            <li>Quality Assurance</li>
-            <li>Operations Management</li>
-          </ul>
-          
-
-        <section class="card">
-          <h2>What I Value</h2>
-          <ul class="value-list">
-            <li>Building tools that feel useful in real life</li>
-            <li>Learning in public and showing growth honestly</li>
-            <li>Combining empathy, design, and technical progress</li>
-            <li>Using AI as a collaborator while staying transparent</li>
-          </ul>
-        </section>
-      </section>
-
-    </main>
-
-    <script src="script.js"></script>
-  </body>
-</html>
+  // Example: Change status after a simulated delay or application event
+  // updateGardenStatus('Fully Bloomed!');
+</script>
