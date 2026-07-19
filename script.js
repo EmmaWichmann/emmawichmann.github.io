@@ -1,47 +1,35 @@
-const phrases = [
-  "Emma Wichmann.",
-  "a Data Systems Coordinator.",
-  "a QA Tester.",
-  "a Lab Operations Specialist."
-];
-
-let currentPhraseIndex = 0;
-let currentCharIndex = 0;
+const namePhrase = "Emma Wichmann.";
+let charIndex = 0;
 let isDeleting = false;
 const typewriterElement = document.getElementById("typewriter");
 
-function type() {
-  const currentPhrase = phrases[currentPhraseIndex];
-
+function typeName() {
   if (isDeleting) {
-    // Delete characters
-    typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex - 1);
-    currentCharIndex--;
+    // Erase character
+    typewriterElement.textContent = namePhrase.substring(0, charIndex - 1);
+    charIndex--;
   } else {
-    // Type characters
-    typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex + 1);
-    currentCharIndex++;
+    // Type character
+    typewriterElement.textContent = namePhrase.substring(0, charIndex + 1);
+    charIndex++;
   }
 
-  // Speed configuration variables
-  let typingSpeed = isDeleting ? 40 : 80;
+  let speed = isDeleting ? 60 : 100;
 
-  // Phrase complete behavior
-  if (!isDeleting && currentCharIndex === currentPhrase.length) {
-    typingSpeed = 2200; // Pause at the end of the full phrase
+  // Logic boundaries for continuous looping
+  if (!isDeleting && charIndex === namePhrase.length) {
+    speed = 3000; // Pause for 3 full seconds on your name so people can read it clearly
     isDeleting = true;
-  } else if (isDeleting && currentCharIndex === 0) {
+  } else if (isDeleting && charIndex === 0) {
     isDeleting = false;
-    currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length; // Loop around infinitely
-    typingSpeed = 400; // Pause before beginning next phrase execution
+    speed = 500; // Small breath before starting to re-type
   }
 
-  setTimeout(type, typingSpeed);
+  setTimeout(typeName, speed);
 }
 
-// Fire execution matrices safely when DOM processes settle
 document.addEventListener("DOMContentLoaded", () => {
   if (typewriterElement) {
-    type();
+    typeName();
   }
 });
