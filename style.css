@@ -1,296 +1,146 @@
-:root {
-  --bg: #f7f1e8;
-  --paper: #fffaf4;
-  --text: #2d2119;
-  --muted: #6a5648;
-  --accent: #a55d3a;
-  --accent-soft: #ead8c9;
-  --line: #dbc8b8;
-  --shadow: 0 22px 44px rgba(82, 54, 35, 0.08);
-  --radius: 24px;
-}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emma Wichmann | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="page-wrapper">
+      
+      <!-- HERO CONTAINER WITH NAME TYPEWRITER -->
+      <section class="card hero-card-wrapper">
+        <div class="hero-container">
+          
+          <div class="hero-text-content">
+            <span class="eyebrow">Cross-Functional Software Engineer</span>
+            <h1 class="hero-title">
+              Hi, I’m <span id="typewriter"></span><span class="cursor">|</span>
+            </h1>
+            
+            <p class="hero-description">
+              I am a builder who thrives at the intersection of science, technology, data, and human behavior. My background in psychology, clinical research, and data analysis taught me to love breaking down absolute chaos into structured systems—understanding both the hard numbers behind a problem and the real human habits of the people interacting with it.
+            </p>
+            
+            <p class="hero-description">
+              Now, I use software engineering, AI collaboration, and a heavy dose of practical problem-solving to turn ideas into actual, functioning tools. Through self-directed building across Python, JavaScript, and front-end design, I focus on creating digital systems that optimize workflows, organize messy data, and make everyday processes run smarter.
+            </p>
 
-* {
-  box-sizing: border-box;
-}
+            <p class="hero-description">
+              What makes me different is that I don’t think in isolation. I don't look at a screen just like a developer, and I don't look at a spreadsheet just like a researcher. I look at the big picture—diving deep into technical details, aligning them with operational realities, and building intuitive front-end experiences.
+            </p>
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background:
-    radial-gradient(circle at top left, rgba(234, 216, 201, 0.85), transparent 24%),
-    radial-gradient(circle at bottom right, rgba(165, 93, 58, 0.12), transparent 24%),
-    linear-gradient(180deg, #fbf7f2 0%, var(--bg) 100%);
-  color: var(--text);
-  font-family: "Inter", sans-serif;
-}
+            <div class="hero-actions">
+              <a href="#projects" class="btn btn-primary">View My Projects</a>
+              <a href="mailto:emma.1.wichmann@gmail.com" class="btn btn-secondary">Let's Connect</a>
+              <a class="btn btn-secondary" href="https://github.com/EmmaWichmann" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </div>
 
-.page-wrapper {
-  width: min(1120px, calc(100% - 32px));
-  margin: 0 auto;
-  padding: 40px 0 64px;
-}
+          <div class="hero-visual">
+            <div class="hero-illustration">
+              <!-- Glow backdrop -->
+              <div class="glow-sparkle"></div>
 
-.card {
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 32px;
-  margin-bottom: 24px;
-}
+              <!-- 1. The Flower SVG -->
+              <svg class="swaying-flower" width="120" height="170" viewBox="0 0 100 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 150C50 100 40 70 50 20" stroke="#8C6247" stroke-width="3" stroke-linecap="round"/>
+                <path d="M50 70C30 60 25 40 45 45C45 45 50 55 50 70Z" fill="#D4A373"/>
+                <path d="M52 90C72 80 77 60 57 65C57 65 52 75 52 90Z" fill="#D4A373"/>
+                <path d="M50 20C35 5 65 5 50 20Z" fill="#E6CCB2"/>
+              </svg>
+              
+              <!-- 2. The Status Log Stacked Cleanly Underneath -->
+              <div class="status-log">
+                <span class="status-dot"></span>
+                <p class="status-text" id="garden-status"><strong>Status:</strong> Active Build (In Progress)</p>
+              </div>
+            </div>
+          </div>
 
-/* --- TYPOGRAPHY --- */
-h1, h2, h3 {
-  margin-top: 0;
-  font-family: "Cormorant Garamond", Georgia, serif;
-  line-height: 1.1;
-  color: var(--text);
-}
+        </div>
+      </section>
 
-h1 {
-  margin-bottom: 18px;
-  font-size: clamp(2rem, 5vw, 3.2rem);
-}
+      <!-- BIO / ABOUT SECTION -->
+      <section class="card about-section">
+        <h2>About & Philosophy</h2>
+        <p>
+          I began exploring code while studying for the MCAT and customizing Anki cards, then continued building through self-directed projects focused on learning, accessibility, communication, and everyday problem-solving. My background in the life sciences shaped the way I approach product work: with empathy, precision, and a strong bias toward tools that make complex tasks feel more manageable.
+        </p>
+        <p>
+          I have a strong interest in AI-assisted workflows and prompt-based problem solving, using tools such as Claude, Codex, ChatGPT, Gemini, and Copilot to accelerate research, testing, iteration, and learning. At the same time, I care deeply about understanding the underlying code itself, building the judgment to balance AI leverage with real technical fluency. I am especially interested in QA testing, health-tech, accessibility-minded product work, and front-end experiences that feel thoughtful, useful, and human.
+        </p>
+      </section>
 
-h2 {
-  margin-bottom: 14px;
-  font-size: 2.1rem;
-  color: var(--accent);
-}
+      <!-- FEATURED PROJECTS SECTION -->
+      <section id="projects" class="card featured-projects">
+        <div class="section-heading">
+          <h2>Featured Projects</h2>
+          <p>A collection of tools engineered to solve real-world problems and track continuous growth.</p>
+        </div>
 
-h3 {
-  margin-bottom: 10px;
-  font-size: 1.6rem;
-}
+        <div class="project-grid">
+          <article class="project-card">
+            <h3>Outfit Archive</h3>
+            <p>A personal web archive application built to document, tag, and organize daily styles and personal outfits into a searchable digital closet.</p>
+            <a href="https://emmawichmann.github.io/Outfit-Archive/" target="_blank" rel="noreferrer">Open project</a>
+          </article>
 
-p, li, a {
-  font-size: 1rem;
-  line-height: 1.7;
-}
+          <article class="project-card">
+            <h3>Emma Gets Hired</h3>
+            <p>A motivational application built around a task-based reward system that generates incentives as application milestones are reached. Currently under active reconstruction to integrate a robust Python backend.</p>
+            <a href="https://emmawichmann.github.io/emmagetshired/" target="_blank" rel="noreferrer">Open project</a>
+          </article>
 
-.hero-description, .about-section p, .section-heading p, .project-card p, .value-list li {
-  color: var(--muted);
-}
+          <article class="project-card">
+            <h3>Career Compass</h3>
+            <p>An interactive web application built to systematically track daily coding practice, log core study milestones, and maintain learning momentum.</p>
+            <a href="https://emmawichmann.github.io/Coding-Learning-Hub/" target="_blank" rel="noreferrer">Open project</a>
+          </article>
 
-.eyebrow {
-  display: block;
-  margin: 0 0 12px;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
+          <article class="project-card">
+            <h3>Sage and Speak</h3>
+            <p>A personal speech-related app designed to optimize communication access. This is one of the projects I most want to keep improving.</p>
+            <a href="https://github.com/EmmaWichmann/sagespeak" target="_blank" rel="noreferrer">View repo folder</a>
+          </article>
+        </div>
+      </section>
 
-/* --- HERO CORE GRID LAYOUT --- */
-.hero-container {
-  display: grid;
-  grid-template-columns: 1.3fr 0.7fr;
-  gap: 40px;
-  align-items: center;
-}
+      <!-- BOTTOM SPLIT LAYOUT -->
+      <section class="split-layout">
+        <section class="card">
+          <h2>Current Focus</h2>
+          <ul class="tag-list">
+            <li>Software Engineering</li>
+            <li>Python Scripting</li>
+            <li>JavaScript</li>
+            <li>SwiftUI</li>
+            <li>Data Engineering</li>
+            <li>Quality Assurance</li>
+            <li>Operations Management</li>
+          </ul>
+        </section>
 
-.hero-text-content {
-  display: flex;
-  flex-direction: column;
-}
+        <section class="card">
+          <h2>What I Value</h2>
+          <ul class="value-list">
+            <li>Building tools that feel useful in real life</li>
+            <li>Learning in public and showing growth honestly</li>
+            <li>Combining empathy, design, and technical progress</li>
+            <li>Using AI as a collaborator while staying transparent</li>
+          </ul>
+        </section>
+      </section>
 
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 24px;
-}
+    </main>
 
-/* --- BUTTONS --- */
-.btn, .project-card a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  padding: 12px 24px;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
-}
-
-.btn-primary {
-  background: var(--accent);
-  color: #ffffff;
-}
-
-.btn-primary:hover {
-  background: #8e4e2f;
-}
-
-.btn-secondary, .project-card a {
-  background: var(--accent-soft);
-  color: var(--accent);
-}
-
-.btn-secondary:hover, .project-card a:hover {
-  background: #e2cbba;
-}
-
-/* --- PROJECTS COMPONENT --- */
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.project-card {
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 24px;
-  background: #fffdf9;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.project-card p {
-  min-height: 90px;
-}
-
-/* --- BOTTOM SPLIT LAYOUT --- */
-.split-layout {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.tag-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding-left: 0;
-  list-style: none;
-  margin: 0;
-}
-
-.tag-list li {
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.value-list {
-  padding-left: 20px;
-  margin: 0;
-}
-
-.value-list li {
-  margin-bottom: 8px;
-}
-
-/* --- CHANGELOG STATUS STYLING --- */
-.status-log {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(165, 93, 58, 0.06);
-  padding: 8px 14px;
-  border-radius: 8px;
-  border: 1px solid var(--line);
-  margin-top: 0; /* Updated to 0 so the flex layout handles the stack spacing */
-  width: fit-content;
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  background-color: var(--accent);
-  border-radius: 50%;
-  display: inline-block;
-  animation: statusPulse 2s ease-in-out infinite;
-}
-
-@keyframes statusPulse {
-  0% { opacity: 0.3; transform: scale(0.9); }
-  50% { opacity: 1; transform: scale(1.1); }
-  100% { opacity: 0.3; transform: scale(0.9); }
-}
-
-.status-text {
-  font-size: 0.85rem !important;
-  margin: 0 !important;
-  color: var(--muted) !important;
-}
-
-/* --- VISUAL ELEMENTS --- */
-.hero-visual {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero-illustration {
-  position: relative;
-  display: flex;
-  flex-direction: column; /* Stacks the flower and status vertically */
-  align-items: center;    /* Centers both components horizontally */
-  gap: 16px;              /* Controls the clear space between the flower and the text */
-}
-
-.swaying-flower {
-  transform-origin: bottom center;
-  animation: elegantSway 6s ease-in-out infinite alternate;
-  z-index: 2;
-}
-
-@keyframes elegantSway {
-  0% { transform: rotate(-4deg); }
-  100% { transform: rotate(6deg); }
-}
-
-.glow-sparkle {
-  position: absolute;
-  width: 140px;
-  height: 140px;
-  background: #E6CCB2;
-  filter: blur(40px);
-  opacity: 0.4;
-  z-index: 1;
-}
-
-/* --- TYPEWRITER CURSOR --- */
-.cursor {
-  color: var(--accent);
-  font-weight: 700;
-  animation: cursorBlink 0.8s infinite;
-}
-
-@keyframes cursorBlink {
-  50% { opacity: 0; }
-}
-
-/* --- RESPONSIVE MOBILE --- */
-@media (max-width: 840px) {
-  .hero-container, .project-grid, .split-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-container {
-    text-align: center;
-  }
-
-  .hero-actions {
-    justify-content: center;
-  }
-
-  .hero-visual {
-    grid-row: 1;
-    margin-bottom: 12px;
-  }
-
-  .project-card p {
-    min-height: 0;
-  }
-}
+    <script src="script.js"></script>
+  </body>
+</html>
