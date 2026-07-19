@@ -50,8 +50,7 @@ h1, h2, h3 {
 
 h1 {
   margin-bottom: 18px;
-  font-size: clamp(1.8rem, 4vw, 2.5rem); /* Prevents overflow errors inside columns */
-  min-height: 70px; /* Reserves space so text wrapping doesn't push sections around */
+  font-size: clamp(2rem, 5vw, 3.2rem);
 }
 
 h2 {
@@ -61,8 +60,8 @@ h2 {
 }
 
 h3 {
-  margin-bottom: 12px;
-  font-size: 1.4rem;
+  margin-bottom: 10px;
+  font-size: 1.6rem;
 }
 
 p, li, a {
@@ -72,12 +71,6 @@ p, li, a {
 
 .hero-description, .about-section p, .section-heading p, .project-card p, .value-list li {
   color: var(--muted);
-}
-
-.text-link {
-  color: var(--accent);
-  text-decoration: underline;
-  font-weight: 600;
 }
 
 .eyebrow {
@@ -110,7 +103,7 @@ p, li, a {
   margin-top: 24px;
 }
 
-/* --- UI CALL TO ACTIONS --- */
+/* --- BUTTONS --- */
 .btn, .project-card a {
   display: inline-flex;
   align-items: center;
@@ -163,12 +156,11 @@ p, li, a {
   min-height: 90px;
 }
 
-/* --- RESUME SNAPSHOT MATRIX --- */
-.snapshot-grid {
+/* --- BOTTOM SPLIT LAYOUT --- */
+.split-layout {
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: 40px;
-  margin-top: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
 }
 
 .tag-list {
@@ -195,10 +187,10 @@ p, li, a {
 }
 
 .value-list li {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
-/* --- VECTOR ASSET RECONTAINMENT --- */
+/* --- VISUAL ELEMENTS --- */
 .hero-visual {
   display: flex;
   justify-content: center;
@@ -233,7 +225,7 @@ p, li, a {
   z-index: 1;
 }
 
-/* --- TYPEWRITER GRAPHIC ENGINES --- */
+/* --- TYPEWRITER CURSOR --- */
 .cursor {
   color: var(--accent);
   font-weight: 700;
@@ -244,9 +236,9 @@ p, li, a {
   50% { opacity: 0; }
 }
 
-/* --- TABLET AND SMARTPHONE VIEWPORTS --- */
+/* --- RESPONSIVE MOBILE --- */
 @media (max-width: 840px) {
-  .hero-container, .project-grid, .snapshot-grid {
+  .hero-container, .project-grid, .split-layout {
     grid-template-columns: 1fr;
   }
 
