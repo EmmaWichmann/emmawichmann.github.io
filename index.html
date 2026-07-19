@@ -1,152 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emma Wichmann | Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <main class="page-wrapper">
-      
-      <!-- HERO CONTAINER WITH NAME TYPEWRITER -->
-      <section class="card hero-card-wrapper">
-        <div class="hero-container">
-          
-          <div class="hero-text-content">
-            <span class="eyebrow">Cross-Functional Software Engineer</span>
-            <h1 class="hero-title">
-              Hi, I’m <span id="typewriter"></span><span class="cursor">|</span>
-            </h1>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <p class="title-role">Cross-Functional Software Engineer</p>
+            <h1>Hi, I'm <span id="typewriter-name">Emma Wichmann</span></h1>
             
-            <p class="hero-description">
-              I am a builder who thrives at the intersection of science, technology, data, and human behavior. My background in psychology, clinical research, and data analysis taught me to love breaking down absolute chaos into structured systems—understanding both the hard numbers behind a problem and the real human habits of the people interacting with it.
+            <p class="hero-bio">
+                I am a builder who thrives at the intersection of science, technology, data, and human behavior. My background in psychology, clinical research, and data analysis taught me to love breaking down absolute chaos into structured systems—understanding both the hard numbers behind a problem and the real human habits of the people interacting with it.
             </p>
-            
-            <p class="hero-description">
-              Now, I use software engineering, AI collaboration, and a heavy dose of practical problem-solving to turn ideas into actual, functioning tools. Through self-directed building across Python, JavaScript, and front-end design, I focus on creating digital systems that optimize workflows, organize messy data, and make everyday processes run smarter.
+            <p class="hero-bio">
+                Now, I use software engineering, AI collaboration, and a heavy dose of practical problem-solving to turn ideas into actual, functioning tools. Through self-directed building across Python, JavaScript, and front-end design, I focus on creating digital systems that optimize workflows, organize messy data, and make everyday processes run smarter.
             </p>
-
-            <p class="hero-description">
-              What makes me different is that I don’t think in isolation. I don't look at a screen just like a developer, and I don't look at a spreadsheet just like a researcher. I look at the big picture—diving deep into technical details, aligning them with operational realities, and building intuitive front-end experiences.
+            <p class="hero-bio">
+                What makes me different is that I don't think in isolation. I don't look at a screen just like a developer, and I don't look at a spreadsheet just like a researcher. I look at the big picture—diving deep into technical details, aligning them with operational realities, and building intuitive front-end experiences.
             </p>
 
-            <div class="hero-actions">
-              <a href="#projects" class="btn btn-primary">View My Projects</a>
-              <a href="mailto:emma.1.wichmann@gmail.com" class="btn btn-secondary">Let's Connect</a>
-              <a class="btn btn-secondary" href="https://github.com/EmmaWichmann" target="_blank" rel="noreferrer">GitHub</a>
-            </div>
-          </div>
+            <nav class="hero-links">
+                <a href="#projects">View My Projects</a>
+                <a href="https://linkedin.com" target="_blank">Let's Connect</a>
+                <a href="https://github.com/emmawichmann" target="_blank">GitHub</a>
+            </nav>
+        </header>
 
-          <div class="hero-visual">
-            <div class="hero-illustration">
-              <!-- Glow backdrop -->
-              <div class="glow-sparkle"></div>
+        <div class="status-badge">Status: Active Build (In Progress)</div>
 
-              <!-- 1. The Flower SVG -->
-              <svg class="swaying-flower" width="120" height="170" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 150C50 100 40 70 50 20" stroke="#8C6247" stroke-width="3" stroke-linecap="round"/>
-                <path d="M50 70C30 60 25 40 45 45C45 45 50 55 50 70Z" fill="#D4A373"/>
-                <path d="M52 90C72 80 77 60 57 65C57 65 52 75 52 90Z" fill="#D4A373"/>
-                <path d="M50 20C35 5 65 5 50 20Z" fill="#E6CCB2"/>
-              </svg>
-              
-              <!-- 2. The Status Log Stacked Cleanly Underneath -->
-              <div class="status-log">
-                <span class="status-dot"></span>
-                <p class="status-text" id="garden-status"><strong>Status:</strong> Active Build (In Progress)</p>
-              </div>
-            </div>
-          </div>
+        <main class="main-layout">
+            <section class="about-section">
+                <h2>About & Philosophy</h2>
+                <p>I began exploring code while studying for the MCAT and customizing Anki cards, then continued building through self-directed projects focused on learning, accessibility, communication, and everyday problem-solving. My background in the life sciences shaped the way I approach product work: with empathy, precision, and a strong bias toward tools that make complex tasks feel more manageable.</p>
+                <p>I have a strong interest in AI-assisted workflows and prompt-based problem solving, using tools such as Claude, Codex, ChatGPT, Gemini, and Copilot to accelerate research, testing, iteration, and learning. At the same time, I care deeply about understanding the underlying code itself, building the judgment to balance AI leverage with real technical fluency. I am especially interested in QA testing, health-tech, accessibility-minded product work, and front-end experiences that feel thoughtful, useful, and human.</p>
+            </section>
 
-        </div>
-      </section>
+            <section id="projects" class="projects-section">
+                <h2>Featured Projects</h2>
+                <p class="section-intro">A collection of tools engineered to solve real-world problems and track continuous growth.</p>
+                
+                <div class="project-list">
+                    <div class="project-card">
+                        <h3>Outfit Archive 👗</h3>
+                        <p>A high-utility visual asset organizer designed to catalog personal closet ecosystems and streamline logistics during residential relocation transitions.</p>
+                        <a href="https://emmawichmann.github.io/Outfit-Archive/" target="_blank" class="project-link">Live Demo →</a>
+                    </div>
 
-      <!-- BIO / ABOUT SECTION -->
-      <section class="card about-section">
-        <h2>About & Philosophy</h2>
-        <p>
-          I began exploring code while studying for the MCAT and customizing Anki cards, then continued building through self-directed projects focused on learning, accessibility, communication, and everyday problem-solving. My background in the life sciences shaped the way I approach product work: with empathy, precision, and a strong bias toward tools that make complex tasks feel more manageable.
-        </p>
-        <p>
-          I have a strong interest in AI-assisted workflows and prompt-based problem solving, using tools such as Claude, Codex, ChatGPT, Gemini, and Copilot to accelerate research, testing, iteration, and learning. At the same time, I care deeply about understanding the underlying code itself, building the judgment to balance AI leverage with real technical fluency. I am especially interested in QA testing, health-tech, accessibility-minded product work, and front-end experiences that feel thoughtful, useful, and human.
-        </p>
-      </section>
+                    <div class="project-card">
+                        <h3>Music Mood App 🎵</h3>
+                        <p>An interactive, client-side web application mapping sound tracks dynamically onto customized psychological user mood profiles.</p>
+                        <a href="https://emmawichmann.github.io/musicmoodapp/" target="_blank" class="project-link">Live Demo →</a>
+                    </div>
 
-      <!-- FEATURED PROJECTS SECTION -->
-      <section id="projects" class="card featured-projects">
-        <div class="section-heading">
-          <h2>Featured Projects</h2>
-          <p>A collection of tools engineered to solve real-world problems and track continuous growth.</p>
-        </div>
+                    <div class="project-card">
+                        <h3>Career Compass 🧭</h3>
+                        <p>An interactive web application built to systematically track daily coding practice and study milestones.</p>
+                    </div>
 
-        <div class="project-grid">
-          <article class="project-card">
-            <h3>Outfit Archive</h3>
-            <p>A personal web archive application built to document, tag, and organize daily styles and personal outfits into a searchable digital closet.</p>
-            <a href="https://emmawichmann.github.io/Outfit-Archive/" target="_blank" rel="noreferrer">Open project</a>
-          </article>
-
-          <article class="project-card">
-            <h3>Emma Gets Hired</h3>
-            <p>A motivational application built around a task-based reward system that generates incentives as application milestones are reached. Currently under active reconstruction to integrate a robust Python backend.</p>
-            <a href="https://emmawichmann.github.io/emmagetshired/" target="_blank" rel="noreferrer">Open project</a>
-          </article>
-
-          <article class="project-card">
-            <h3>Career Compass</h3>
-            <p>An interactive web application built to systematically track daily coding practice, log core study milestones, and maintain learning momentum.</p>
-            <a href="https://emmawichmann.github.io/Coding-Learning-Hub/" target="_blank" rel="noreferrer">Open project</a>
-          </article>
-
-          <article class="project-card">
-            <h3>Music Mood App</h3>
-            <p>A front-end project for saving songs by mood while practicing HTML, CSS, and JavaScript through visible, interactive features.</p>
-            <a href="https://emmawichmann.github.io/musicmoodapp/" target="_blank" rel="noreferrer">Open project</a>
-          </article>
-
-          <article class="project-card">
-            <h3>Sage and Speak</h3>
-            <p>A personal speech-related app designed to optimize communication access. This is one of the projects I most want to keep improving.</p>
-            <a href="https://github.com/EmmaWichmann/sagespeak" target="_blank" rel="noreferrer">View repo folder</a>
-          </article>
-        </div>
-      </section>
-
-      <!-- BOTTOM SPLIT LAYOUT -->
-      <section class="split-layout">
-        <section class="card">
-          <h2>Current Focus</h2>
-          <ul class="tag-list">
-            <li>Software Engineering</li>
-            <li>Python Scripting</li>
-            <li>JavaScript</li>
-            <li>SwiftUI</li>
-            <li>Data Engineering</li>
-            <li>Quality Assurance</li>
-            <li>Operations Management</li>
-          </ul>
-        </section>
-
-        <section class="card">
-          <h2>What I Value</h2>
-          <ul class="value-list">
-            <li>Building tools that feel useful in real life</li>
-            <li>Learning in public and showing growth honestly</li>
-            <li>Combining empathy, design, and technical progress</li>
-            <li>Using AI as a collaborator while staying transparent</li>
-          </ul>
-        </section>
-      </section>
-
-    </main>
-
+                    <div class="project-card">
+                        <h3>Emma Gets Hired 🏆</h3>
+                        <p>A productivity dashboard built around a task-based reward milestone tracking system to optimize job search workflows.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
     <script src="script.js"></script>
-  </body>
+</body>
 </html>
