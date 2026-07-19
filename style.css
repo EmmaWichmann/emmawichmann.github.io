@@ -259,3 +259,44 @@ p, li, a {
     min-height: 0;
   }
 }
+/* Under Construction Alert with Pulse Animation */
+.construction-notice {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #b57a55; /* Warm clay tone */
+  background: rgba(165, 93, 58, 0.08); /* Soft tinted background bubble */
+  padding: 6px 14px;
+  border-radius: 999px;
+  display: inline-block;
+  margin-bottom: 16px;
+  width: fit-content;
+  
+  /* The Magic Pulse Engine */
+  animation: noticePulse 2.5s ease-in-out infinite;
+}
+
+/* Smooth breathing/glowing effect scaling up and down slightly */
+@keyframes noticePulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(165, 93, 58, 0.2);
+  }
+  50% {
+    transform: scale(1.03); /* Tiny scale up so it "breathes" */
+    box-shadow: 0 0 12px 4px rgba(165, 93, 58, 0.15); /* Soft outer glow */
+    background: rgba(165, 93, 58, 0.12); /* Slightly deepens color */
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(165, 93, 58, 0);
+  }
+}
+
+/* Responsive adjustment to center it on phones */
+@media (max-width: 840px) {
+  .construction-notice {
+    margin: 0 auto 16px auto;
+  }
+}
