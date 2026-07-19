@@ -199,7 +199,7 @@ p, li, a {
   padding: 8px 14px;
   border-radius: 8px;
   border: 1px solid var(--line);
-  margin-top: 24px;
+  margin-top: 0; /* Updated to 0 so the flex layout handles the stack spacing */
   width: fit-content;
 }
 
@@ -234,8 +234,9 @@ p, li, a {
 .hero-illustration {
   position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column; /* Stacks the flower and status vertically */
+  align-items: center;    /* Centers both components horizontally */
+  gap: 16px;              /* Controls the clear space between the flower and the text */
 }
 
 .swaying-flower {
