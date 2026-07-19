@@ -83,7 +83,40 @@ p, li, a {
   font-weight: 700;
 }
 
-/* --- HERO CORE GRID LAYOUT --- */
+/* --- UNDER CONSTRUCTION PULSE BADGE --- */
+.construction-notice {
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #b57a55 !important;
+  background: rgba(165, 93, 58, 0.1) !important;
+  padding: 8px 16px !important;
+  border-radius: 999px !important;
+  display: inline-block !important;
+  margin-bottom: 20px !important;
+  width: fit-content;
+  border: 1px solid rgba(165, 93, 58, 0.2);
+  animation: noticePulse 2s ease-in-out infinite !important;
+}
+
+@keyframes noticePulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(165, 93, 58, 0.3);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 14px 4px rgba(165, 93, 58, 0.2);
+    background: rgba(165, 93, 58, 0.15) !important;
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(165, 93, 58, 0);
+  }
+}
+
+/* --- HERO GRID --- */
 .hero-container {
   display: grid;
   grid-template-columns: 1.3fr 0.7fr;
@@ -156,7 +189,7 @@ p, li, a {
   min-height: 90px;
 }
 
-/* --- BOTTOM SPLIT LAYOUT --- */
+/* --- SPLIT LAYOUT --- */
 .split-layout {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -190,7 +223,7 @@ p, li, a {
   margin-bottom: 8px;
 }
 
-/* --- VISUAL ELEMENTS --- */
+/* --- VISUAL INTERACTIVE ENGINE --- */
 .hero-visual {
   display: flex;
   justify-content: center;
@@ -225,7 +258,6 @@ p, li, a {
   z-index: 1;
 }
 
-/* --- TYPEWRITER CURSOR --- */
 .cursor {
   color: var(--accent);
   font-weight: 700;
@@ -236,7 +268,6 @@ p, li, a {
   50% { opacity: 0; }
 }
 
-/* --- RESPONSIVE MOBILE --- */
 @media (max-width: 840px) {
   .hero-container, .project-grid, .split-layout {
     grid-template-columns: 1fr;
@@ -257,46 +288,5 @@ p, li, a {
 
   .project-card p {
     min-height: 0;
-  }
-}
-/* Under Construction Alert with Pulse Animation */
-.construction-notice {
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #b57a55; /* Warm clay tone */
-  background: rgba(165, 93, 58, 0.08); /* Soft tinted background bubble */
-  padding: 6px 14px;
-  border-radius: 999px;
-  display: inline-block;
-  margin-bottom: 16px;
-  width: fit-content;
-  
-  /* The Magic Pulse Engine */
-  animation: noticePulse 2.5s ease-in-out infinite;
-}
-
-/* Smooth breathing/glowing effect scaling up and down slightly */
-@keyframes noticePulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(165, 93, 58, 0.2);
-  }
-  50% {
-    transform: scale(1.03); /* Tiny scale up so it "breathes" */
-    box-shadow: 0 0 12px 4px rgba(165, 93, 58, 0.15); /* Soft outer glow */
-    background: rgba(165, 93, 58, 0.12); /* Slightly deepens color */
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(165, 93, 58, 0);
-  }
-}
-
-/* Responsive adjustment to center it on phones */
-@media (max-width: 840px) {
-  .construction-notice {
-    margin: 0 auto 16px auto;
   }
 }
