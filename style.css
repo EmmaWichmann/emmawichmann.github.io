@@ -10,6 +10,17 @@
   --radius: 24px;
 }
 
+:root[data-theme="dark"] {
+  --bg: #17120e;
+  --paper: #221a15;
+  --text: #f3e9df;
+  --muted: #c3ac9b;
+  --accent: #e6996a;
+  --accent-soft: #3a2a1f;
+  --line: #3d2e24;
+  --shadow: 0 22px 44px rgba(0, 0, 0, 0.35);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -23,6 +34,39 @@ body {
     linear-gradient(180deg, #fbf7f2 0%, var(--bg) 100%);
   color: var(--text);
   font-family: "Inter", sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+:root[data-theme="dark"] body {
+  background:
+    radial-gradient(circle at top left, rgba(230, 153, 106, 0.1), transparent 24%),
+    radial-gradient(circle at bottom right, rgba(230, 153, 106, 0.06), transparent 24%),
+    linear-gradient(180deg, #1a1410 0%, var(--bg) 100%);
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 50;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--text);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.08);
 }
 
 .page-wrapper {
@@ -38,6 +82,15 @@ body {
   box-shadow: var(--shadow);
   padding: 32px;
   margin-bottom: 24px;
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    opacity 0.6s ease, transform 0.6s ease;
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.card.in-view {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* --- TYPOGRAPHY --- */
@@ -150,10 +203,44 @@ p, li, a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+}
+
+:root[data-theme="dark"] .project-card {
+  background: var(--accent-soft);
+}
+
+.project-card:hover,
+.project-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 26px rgba(82, 54, 35, 0.12);
 }
 
 .project-card p {
   min-height: 90px;
+}
+
+.project-meta {
+  display: flex;
+  gap: 14px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-top: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+}
+
+.project-meta span:empty {
+  display: none;
+}
+
+.project-card:hover .project-meta,
+.project-card:focus-within .project-meta {
+  max-height: 40px;
+  opacity: 1;
+  margin-top: 10px;
 }
 
 /* --- BOTTOM SPLIT LAYOUT --- */
@@ -216,6 +303,21 @@ p, li, a {
   0% { opacity: 0.3; transform: scale(0.9); }
   50% { opacity: 1; transform: scale(1.1); }
   100% { opacity: 0.3; transform: scale(0.9); }
+}
+
+/* Fresh = something was pushed to GitHub in the last 48 hours */
+.status-log.fresh {
+  background: rgba(230, 153, 106, 0.14);
+  border-color: var(--accent);
+}
+
+.status-log.fresh .status-dot {
+  animation: statusPulse 0.9s ease-in-out infinite;
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.hero-illustration:has(.status-log.fresh) .glow-sparkle {
+  opacity: 0.7;
 }
 
 .status-text {
