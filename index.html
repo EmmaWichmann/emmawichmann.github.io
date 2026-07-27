@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Emma Wichmann | Portfolio</title>
+    <title>Emma Wichmann | Technical Product and Software Portfolio</title>
+    <meta
+      name="description"
+      content="Emma Wichmann is an early career technologist with a clinical research background, building projects in Python, Flask, SQL, and JavaScript. Explore technical projects including EmmaGetsHired, Career Compass, and Sage and Speak."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -23,31 +27,35 @@
 
           <div class="hero-text-content">
             <h1 class="hero-title">
-              Hi, I’m <span id="typewriter"></span><span class="cursor">|</span>
+              Hi, I’m <span id="typewriter"></span><span class="cursor" aria-hidden="true">|</span>
             </h1>
 
-            <p class="hero-description">
-              I am a cross-functional builder specializing in the intersection of technical engineering and organizational execution. Backed by a rigorous background in the life sciences and clinical research, I turn complex, messy data into structured systems that real people and teams can actually use — the same instinct that draws me toward healthcare data and EHR-adjacent analyst work, like the kind of role I'm drawn to at a company such as Epic.
+            <p class="hero-statement">
+              I build practical software and data tools that make complicated work feel more manageable.
             </p>
 
             <p class="hero-description">
-              Today, I combine my analytical precision with self-directed software engineering across <strong>Python</strong>, JavaScript, and modern front-end frameworks. Whether architecting data pipelines, optimizing workflows, or scaling code quality, I design structured digital systems that solve real-world problems.
+              I’m an early career technologist with a background in psychology, physiology, clinical research, and operations. I use Python, Flask, SQL, JavaScript, and AI assisted development to turn complex workflows into clear, usable products.
+            </p>
+
+            <p class="hero-description">
+              I’m seeking entry level opportunities in product support, implementation, quality assurance, technical operations, data analysis, and software teams, especially within health technology, biotechnology, and AI enabled organizations.
             </p>
 
             <div class="hero-actions">
-              <a href="#projects" class="btn btn-primary">View My Projects</a>
-              <a href="mailto:emma.1.wichmann@gmail.com" class="btn btn-secondary">Let's Connect</a>
+              <a href="#projects" class="btn btn-primary">View Projects</a>
               <a class="btn btn-secondary" href="https://github.com/EmmaWichmann" target="_blank" rel="noreferrer">GitHub</a>
+              <a href="mailto:emma.1.wichmann@gmail.com" class="btn btn-secondary">Email Me</a>
             </div>
           </div>
 
           <div class="hero-visual">
             <div class="hero-illustration">
               <!-- Glow backdrop -->
-              <div class="glow-sparkle"></div>
+              <div class="glow-sparkle" aria-hidden="true"></div>
 
               <!-- 1. The Flower SVG -->
-              <svg class="swaying-flower" width="120" height="170" viewBox="0 0 100 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg class="swaying-flower" aria-hidden="true" width="120" height="170" viewBox="0 0 100 150" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M50 150C50 100 40 70 50 20" stroke="#8C6247" stroke-width="3" stroke-linecap="round"/>
                 <path d="M50 70C30 60 25 40 45 45C45 45 50 55 50 70Z" fill="#D4A373"/>
                 <path d="M52 90C72 80 77 60 57 65C57 65 52 75 52 90Z" fill="#D4A373"/>
@@ -56,7 +64,7 @@
 
               <!-- 2. The Status Log Stacked Cleanly Underneath -->
               <div class="status-log">
-                <span class="status-dot"></span>
+                <span class="status-dot" aria-hidden="true"></span>
                 <p class="status-text" id="garden-status"><strong>Status:</strong> Active Build (In Progress)</p>
               </div>
             </div>
@@ -67,15 +75,12 @@
 
       <!-- BIO / ABOUT SECTION -->
       <section class="card about-section">
-        <h2>About & Philosophy</h2>
+        <h2>About</h2>
         <p>
-          I began exploring code while studying for the MCAT and customizing Anki cards, then continued building through self-directed projects focused on learning, accessibility, communication, and everyday problem-solving. My background in the life sciences shaped the way I approach product work: with empathy, precision, and a strong bias toward tools that make complex tasks feel more manageable.
+          Emma began building software through self-directed projects, teaching herself to code by working on real problems instead of following a fixed curriculum. Her background in psychology, physiology, and clinical research shaped an analytical, evidence-based approach to breaking down and solving problems.
         </p>
         <p>
-          I have a strong interest in AI-assisted workflows and prompt-based problem solving, using tools such as Claude, Codex, ChatGPT, Gemini, and Copilot to accelerate research, testing, iteration, and learning. At the same time, I care deeply about understanding the underlying code itself, building the judgment to balance AI leverage with real technical fluency. I am especially interested in QA testing, health-tech, bio-tech, accessibility-minded product work, and front-end experiences that feel thoughtful, useful, and human.
-        </p>
-        <p>
-          On the analyst side, my clinical research background means I am comfortable living inside structured healthcare data — organizing it, questioning it, and translating it into decisions non-technical stakeholders can act on. I am especially interested in EHR and health systems analyst work (Epic-style environments included), where that mix of data fluency and patient-workflow context is exactly what the job demands.
+          She uses AI tools for rapid prototyping, research, testing, and iteration, then verifies and improves the resulting work through structured testing and hands-on review rather than accepting it at face value. She's especially interested in useful, accessible technology and in bringing structured problem-solving to product support, quality assurance, and technical operations roles.
         </p>
       </section>
 
@@ -83,57 +88,97 @@
       <section id="projects" class="card featured-projects">
         <div class="section-heading">
           <h2>Featured Projects</h2>
-          <p>A collection of tools engineered to solve real-world problems and track continuous growth.</p>
+          <p>Tools built around real problems, tested and reviewed by hand.</p>
         </div>
 
-        <div class="project-grid">
-          <article class="project-card" data-repo="outfit-archive">
+        <div class="project-grid project-grid--flagship">
+          <article class="project-card project-card--flagship">
+            <img
+              src="assets/emmagetshired-today.png"
+              alt="EmmaGetsHired Today page showing one daily career action and the animated growth trail"
+              class="project-image"
+              loading="lazy"
+              width="1280"
+              height="860"
+            />
+            <div class="project-card-body">
+              <h3>EmmaGetsHired</h3>
+              <p>An ADHD friendly career action copilot built with Python, Flask, SQLite, Jinja, HTML, CSS, SVG, and pytest. It includes one daily career action, communication practice, networking message tools, automatic progress tracking, and a deterministic Career Opportunity Decoder that organizes job postings without predicting hiring outcomes.</p>
+              <ul class="tech-tags">
+                <li>Python and Flask</li>
+                <li>SQLite and SQL</li>
+                <li>Privacy conscious text processing</li>
+                <li>Responsive interface</li>
+                <li>176 passing tests</li>
+              </ul>
+              <div class="project-actions">
+                <a class="btn btn-secondary" href="https://github.com/EmmaWichmann/emmagetshired" target="_blank" rel="noreferrer">View Source</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card project-card--flagship">
+            <div class="project-card-body">
+              <h3>Career Compass</h3>
+              <p>A browser based learning system for structured SQL and Python practice, skill checks, progress tracking, and portfolio evidence. Built with HTML, CSS, JavaScript, localStorage, and GitHub Pages through an AI assisted development and testing workflow.</p>
+              <ul class="tech-tags">
+                <li>HTML and CSS</li>
+                <li>JavaScript</li>
+                <li>localStorage</li>
+                <li>GitHub Pages</li>
+                <li>AI assisted workflow</li>
+              </ul>
+              <div class="project-actions">
+                <a class="btn btn-primary" href="https://emmawichmann.github.io/careercompass/" target="_blank" rel="noreferrer">Live Project</a>
+                <a class="btn btn-secondary" href="https://github.com/EmmaWichmann/careercompass" target="_blank" rel="noreferrer">View Source</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card project-card--flagship">
+            <div class="project-card-body">
+              <h3>Sage and Speak</h3>
+              <p>A communication and speech practice project with daily affirmations, a streak and progress tracker, and a private reflection space, built with plain HTML, CSS, and JavaScript.</p>
+              <ul class="tech-tags">
+                <li>HTML and CSS</li>
+                <li>JavaScript</li>
+                <li>localStorage</li>
+                <li>Progress tracking</li>
+              </ul>
+              <div class="project-actions">
+                <a class="btn btn-primary" href="https://emmawichmann.github.io/sagespeak/" target="_blank" rel="noreferrer">Live Project</a>
+                <a class="btn btn-secondary" href="https://github.com/EmmaWichmann/sagespeak" target="_blank" rel="noreferrer">View Source</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="project-grid project-grid--supporting">
+          <article class="project-card">
             <h3>Outfit Archive</h3>
             <p>A personal web archive application built to document, tag, and organize daily styles and personal outfits into a searchable digital closet.</p>
-            <a href="https://emmawichmann.github.io/outfit-archive/" target="_blank" rel="noreferrer">Open project</a>
-            <div class="project-meta">
-              <span class="meta-stars"></span>
-              <span class="meta-updated"></span>
+            <ul class="tech-tags">
+              <li>HTML and CSS</li>
+              <li>JavaScript</li>
+              <li>localStorage</li>
+            </ul>
+            <div class="project-actions">
+              <a class="btn btn-primary" href="https://emmawichmann.github.io/outfit-archive/" target="_blank" rel="noreferrer">Live Project</a>
+              <a class="btn btn-secondary" href="https://github.com/EmmaWichmann/outfit-archive" target="_blank" rel="noreferrer">View Source</a>
             </div>
           </article>
 
-          <article class="project-card" data-repo="emmagetshiredv2">
-            <h3>Pipeline <span class="badge-wip">Under Construction</span></h3>
-            <p>A job-search tracker rebuilt from the ground up — formerly "Emma Gets Hired." I'm re-engineering it with a Python (Flask) backend and raw SQL to practice real database design and query logic, rather than just front-end state. Tracks applications, offers, and milestones the way an actual pipeline should.</p>
-            <a href="https://github.com/EmmaWichmann/emmagetshiredv2" target="_blank" rel="noreferrer">View source (in progress)</a>
-            <div class="project-meta">
-              <span class="meta-stars"></span>
-              <span class="meta-updated"></span>
-            </div>
-          </article>
-
-          <article class="project-card" data-repo="careercompass">
-            <h3>Career Compass</h3>
-            <p>An interactive web application built to systematically track daily coding practice, log core study milestones, and maintain learning momentum.</p>
-            <a href="https://emmawichmann.github.io/careercompass/" target="_blank" rel="noreferrer">Open project</a>
-            <div class="project-meta">
-              <span class="meta-stars"></span>
-              <span class="meta-updated"></span>
-            </div>
-          </article>
-
-          <article class="project-card" data-repo="sagespeak">
-            <h3>Sage and Speak</h3>
-            <p>A personal speech-related app designed to optimize communication access. This is one of the projects I most want to keep improving.</p>
-            <a href="https://emmawichmann.github.io/sagespeak/" target="_blank" rel="noreferrer">Open project</a>
-            <div class="project-meta">
-              <span class="meta-stars"></span>
-              <span class="meta-updated"></span>
-            </div>
-          </article>
-
-          <article class="project-card" data-repo="musicmoodapp">
+          <article class="project-card">
             <h3>Music Mood App</h3>
             <p>A front-end project for saving and organizing songs by mood, built to practice HTML, CSS, and JavaScript through visible, interactive features.</p>
-            <a href="https://emmawichmann.github.io/musicmoodapp/" target="_blank" rel="noreferrer">Open project</a>
-            <div class="project-meta">
-              <span class="meta-stars"></span>
-              <span class="meta-updated"></span>
+            <ul class="tech-tags">
+              <li>JavaScript</li>
+              <li>Mood based recommendations</li>
+              <li>Vitest tests</li>
+            </ul>
+            <div class="project-actions">
+              <a class="btn btn-primary" href="https://emmawichmann.github.io/musicmoodapp/" target="_blank" rel="noreferrer">Live Project</a>
+              <a class="btn btn-secondary" href="https://github.com/EmmaWichmann/musicmoodapp" target="_blank" rel="noreferrer">View Source</a>
             </div>
           </article>
         </div>
@@ -144,31 +189,24 @@
         <section class="card">
           <h2>Current Focus</h2>
           <ul class="tag-list">
-            <li>Software Engineering</li>
-            <li>Python Scripting</li>
+            <li>Python</li>
+            <li>Flask</li>
+            <li>SQL</li>
             <li>JavaScript</li>
-            <li>SwiftUI</li>
-            <li>Data Engineering</li>
+            <li>Product Support</li>
             <li>Quality Assurance</li>
-            <li>Operations Management</li>
-            <li>AI-Assisted Workflows</li>
-            <li>Front-End Development</li>
-            <li>Accessibility</li>
-            <li>Health-Tech</li>
-            <li>Bio Tech</li>
-            <li>Human Resources</li>
-            <li>Healthcare Data Analysis</li>
-            <li>EHR Systems</li>
+            <li>Technical Operations</li>
+            <li>Health Technology</li>
           </ul>
         </section>
 
         <section class="card">
-          <h2>What I Value</h2>
+          <h2>How I Work</h2>
           <ul class="value-list">
-            <li>Building tools that feel useful in real life</li>
-            <li>Learning in public and showing growth honestly</li>
-            <li>Combining empathy, design, and technical progress</li>
-            <li>Using AI as a collaborator while staying transparent</li>
+            <li>Build practical tools around real problems</li>
+            <li>Use AI to accelerate research, prototyping, and testing</li>
+            <li>Verify behavior through structured testing and iteration</li>
+            <li>Translate technical information into clear user experiences</li>
           </ul>
         </section>
       </section>

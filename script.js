@@ -111,24 +111,6 @@ async function loadProjectActivity() {
     const repos = await reposRes.json();
     const ownRepos = Array.isArray(repos) ? repos.filter((repo) => !repo.fork) : [];
 
-    document.querySelectorAll("[data-repo]").forEach((card) => {
-      const repo = ownRepos.find(
-        (r) => r.name.toLowerCase() === card.getAttribute("data-repo").toLowerCase()
-      );
-      if (!repo) return;
-
-      const starsEl = card.querySelector(".meta-stars");
-      const updatedEl = card.querySelector(".meta-updated");
-      if (starsEl) starsEl.textContent = `★ ${repo.stargazers_count}`;
-      if (updatedEl) {
-        const updated = new Date(repo.pushed_at);
-        updatedEl.textContent = `Updated ${updated.toLocaleDateString("en-US", {
-          month: "short",
-          day: "numeric",
-        })}`;
-      }
-    });
-
     const mostRecentPush = ownRepos
       .map((repo) => new Date(repo.pushed_at))
       .sort((a, b) => b - a)[0];
