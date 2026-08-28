@@ -253,11 +253,23 @@ a:focus-visible {
   font-size: 1.8rem;
 }
 
+.project-card--has-image {
+  padding: 0 0 24px;
+  overflow: hidden;
+}
+
+.project-card--has-image .project-card-body {
+  padding: 20px 24px 0;
+}
+
 .project-image {
   display: block;
   width: 100%;
   height: auto;
   max-width: 100%;
+  aspect-ratio: 1280 / 860;
+  object-fit: cover;
+  object-position: top;
   border-bottom: 1px solid var(--line);
 }
 
