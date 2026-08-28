@@ -104,6 +104,7 @@
             <div class="project-card-body">
               <h3>EmmaGetsHired</h3>
               <p>An ADHD friendly career action copilot built with Python, Flask, SQLite, Jinja, HTML, CSS, SVG, and pytest. It includes one daily career action, communication practice, networking message tools, automatic progress tracking, and a deterministic Career Opportunity Decoder that organizes job postings without predicting hiring outcomes.</p>
+              <p>AI helped scaffold the decoder's parsing logic and debug it. Testing it against real postings surfaced edge cases it got wrong, like company names bleeding across line breaks and hybrid roles being misread as remote, so I rewrote the extraction rules until the test suite caught them.</p>
               <ul class="tech-tags">
                 <li>Python and Flask</li>
                 <li>SQLite and SQL</li>
@@ -120,7 +121,8 @@
           <article class="project-card project-card--flagship">
             <div class="project-card-body">
               <h3>Career Compass</h3>
-              <p>A browser based learning system for structured SQL and Python practice, skill checks, progress tracking, and portfolio evidence. Built with HTML, CSS, JavaScript, localStorage, and GitHub Pages through an AI assisted development and testing workflow.</p>
+              <p>A browser based learning system for structured SQL and Python practice, skill checks, progress tracking, and portfolio evidence. Built with HTML, CSS, JavaScript, localStorage, and GitHub Pages.</p>
+              <p>AI helped scaffold pages and features, but using it myself surfaced the problem: it had grown into five competing sections and a flashcard mode nobody used. I cut it down to three focused pages, Today, Progress, and Notes, built around one question: what do I need to do today.</p>
               <ul class="tech-tags">
                 <li>HTML and CSS</li>
                 <li>JavaScript</li>
